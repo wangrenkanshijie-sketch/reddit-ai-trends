@@ -1,4 +1,4 @@
-# Reddit AI Trend Reports (Update everyday at 6am CDT)
+# Reddit AI Trend Reports
 
 [English](README.md) | [中文](README_CN.md)
 
