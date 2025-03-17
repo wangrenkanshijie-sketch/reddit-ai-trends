@@ -87,7 +87,8 @@ class ReportProcessor:
                                      previous_report: Optional[Dict[str, Any]] = None,
                                      weekly_posts: Optional[List[Dict[str, Any]]] = None,
                                      monthly_posts: Optional[List[Dict[str, Any]]] = None,
-                                     languages: List[str] = ["en", "zh"]) -> Dict[str, Dict[str, Any]]:
+                                     languages: List[str] = ["en", "zh"],
+                                     save_to_file: bool = True) -> Dict[str, Dict[str, Any]]:
         """
         Generate reports in multiple languages.
         
@@ -97,6 +98,7 @@ class ReportProcessor:
             weekly_posts: List of weekly popular posts
             monthly_posts: List of monthly popular posts
             languages: List of language codes to generate reports for
+            save_to_file: Whether to save the reports to files
             
         Returns:
             Dictionary mapping language codes to report dictionaries
@@ -113,6 +115,10 @@ class ReportProcessor:
                 language=lang
             )
             reports[lang] = report
+            
+            # 如果需要保存到文件，则调用save_report_to_file方法
+            if save_to_file:
+                self.save_report_to_file(report)
             
         return reports
     

@@ -19,9 +19,9 @@ from typing import List, Dict, Any, Optional
 # Add the parent directory to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from services.data_collection.reddit_collector import RedditDataCollector
+from services.reddit_collection.collector import RedditDataCollector
 from services.llm_processing.groq_client import GroqClient
-from services.report_processor import ReportProcessor
+from services.llm_processing.report_processor import ReportProcessor
 from database.mongodb import MongoDBClient
 from config import REPORT_CONFIG
 
@@ -104,10 +104,9 @@ def update_english_readme(report_paths: Dict[str, str], date_str: str) -> None:
     readme_content += f"Automatically generate trend reports from AI-related Reddit communities, supporting both English and Chinese languages. Stay up-to-date with the latest developments in the AI field through daily reports.\n\n"
     readme_content += f"## Latest Reports ({date_str})\n\n"
     
-    for lang, path in report_paths.items():
-        lang_name = "English" if lang == "en" else "Chinese"
-        relative_path = os.path.relpath(path, ".")
-        readme_content += f"- [{lang_name} Report]({relative_path})\n"
+    # 使用固定的latest_report链接，而不是实际文件路径
+    readme_content += f"- [English Report](reports/latest_report_en.md)\n"
+    readme_content += f"- [Chinese Report](reports/latest_report_zh.md)\n"
     
     # Read the rest of the original README
     try:
@@ -154,10 +153,9 @@ def update_chinese_readme(report_paths: Dict[str, str], date_str: str) -> None:
     readme_content += f"自动从Reddit AI相关社区生成趋势报告，支持英文和中文双语。通过每日报告，随时了解AI领域的最新发展。\n\n"
     readme_content += f"## 最新报告 ({date_str})\n\n"
     
-    for lang, path in report_paths.items():
-        lang_name = "英文" if lang == "en" else "中文"
-        relative_path = os.path.relpath(path, ".")
-        readme_content += f"- [{lang_name}报告]({relative_path})\n"
+    # 使用固定的latest_report链接，而不是实际文件路径
+    readme_content += f"- [英文报告](reports/latest_report_en.md)\n"
+    readme_content += f"- [中文报告](reports/latest_report_zh.md)\n"
     
     # Read the rest of the original README
     try:
@@ -206,15 +204,24 @@ def generate_report(languages: List[str] = None, skip_mongodb: bool = False) -> 
         
         # Collect data
         logger.info(f"Collecting data from subreddits: {subreddits}")
-        posts_data = reddit_collector.collect_subreddit_data(subreddits, posts_per_subreddit)
+        
+        # 收集所有帖子
+        all_posts = []
+        for subreddit in subreddits:
+            posts = reddit_collector.get_subreddit_posts(
+                subreddit=subreddit,
+                limit=posts_per_subreddit,
+                time_filter="week"
+            )
+            all_posts.extend(posts)
         
         # Filter posts with more than 10 comments
-        filtered_posts = [post for post in posts_data if post.get('num_comments', 0) > 10]
-        logger.info(f"Filtered {len(filtered_posts)} posts with more than 10 comments from {len(posts_data)} total posts")
+        filtered_posts = [post for post in all_posts if post.get('num_comments', 0) > 10]
+        logger.info(f"Filtered {len(filtered_posts)} posts with more than 10 comments from {len(all_posts)} total posts")
         
         # Get weekly and monthly popular posts
-        weekly_posts = reddit_collector.collect_weekly_popular_posts(subreddits)
-        monthly_posts = reddit_collector.collect_monthly_popular_posts(subreddits)
+        weekly_posts = reddit_collector.get_weekly_popular_posts(subreddits)
+        monthly_posts = reddit_collector.get_monthly_popular_posts(subreddits)
         
         # Get previous report data for comparison
         previous_data = mongodb_client.get_latest_report()
@@ -336,11 +343,23 @@ def main():
         
         # 收集帖子数据
         posts_per_subreddit = REPORT_CONFIG.get('posts_per_subreddit', 10)
-        posts = reddit_collector.collect_posts(subreddits, posts_per_subreddit, min_comments=10)
+        
+        # 收集所有帖子
+        all_posts = []
+        for subreddit in subreddits:
+            posts = reddit_collector.get_subreddit_posts(
+                subreddit=subreddit,
+                limit=posts_per_subreddit,
+                time_filter="week"
+            )
+            all_posts.extend(posts)
+        
+        # 过滤评论数大于10的帖子
+        posts = [post for post in all_posts if post.get('num_comments', 0) > 10]
         
         # 收集每周和每月热门帖子
-        weekly_popular_posts = reddit_collector.collect_weekly_popular_posts(subreddits)
-        monthly_popular_posts = reddit_collector.collect_monthly_popular_posts(subreddits)
+        weekly_popular_posts = reddit_collector.get_weekly_popular_posts(subreddits)
+        monthly_popular_posts = reddit_collector.get_monthly_popular_posts(subreddits)
         
         # 生成报告
         logger.info(f"开始生成报告，语言: {languages}...")

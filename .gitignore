@@ -120,8 +120,12 @@ multilingual_test.py
 test_report_generation.py
 backfill_test.py
 
-# Generated reports
-reports/*
+# Generated reports - 确保不排除reports目录中的文件
+# 明确包含latest_report文件和报告目录
+!reports/
+!reports/**/
+!reports/*.md
+!reports/latest_report_*.md
 !reports/.gitkeep
 
 # Log files
