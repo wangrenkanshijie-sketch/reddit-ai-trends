@@ -6,8 +6,8 @@ Automatically generate trend reports from AI-related Reddit communities, support
 
 ## Latest Reports (2025-03-16)
 
-- [English Report](reports\2025\03\16\report_20250316_223600_en.md)
-- [Chinese Report](reports\2025\03\16\report_20250316_223600_zh.md)
+- [English Report](reports\2025\03\16\report_20250316_en.md)
+- [Chinese Report](reports\2025\03\16\report_20250316_zh.md)
 
 ## Features
 
