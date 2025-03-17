@@ -224,12 +224,12 @@ def generate_report(languages: List[str] = None, skip_mongodb: bool = False) -> 
         monthly_posts = reddit_collector.get_monthly_popular_posts(subreddits)
         
         # Get previous report data for comparison
-        previous_data = mongodb_client.get_latest_report()
+        previous_report = mongodb_client.get_latest_report()
         
         # Generate reports in multiple languages
         reports = report_processor.generate_multilingual_reports(
             filtered_posts, 
-            previous_data, 
+            previous_report, 
             weekly_posts, 
             monthly_posts,
             languages

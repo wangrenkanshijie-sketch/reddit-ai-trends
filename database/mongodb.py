@@ -374,4 +374,40 @@ class MongoDBClient:
         
         except PyMongoError as e:
             logger.error(f"获取日期之前的最新报告时出错: {e}")
-            return None 
+            return None
+    
+    def save_report(self, reports: Dict[str, Any], posts: List[Dict[str, Any]], 
+                  weekly_posts: List[Dict[str, Any]], monthly_posts: List[Dict[str, Any]]) -> str:
+        """
+        保存报告数据到MongoDB，包括报告内容和帖子数据。
+        
+        Args:
+            reports: 报告字典，键为语言代码，值为报告内容
+            posts: 帖子列表
+            weekly_posts: 每周热门帖子列表
+            monthly_posts: 每月热门帖子列表
+            
+        Returns:
+            报告ID
+        """
+        try:
+            # 创建报告数据
+            report_data = {
+                "report_id": f"report_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}",
+                "timestamp": datetime.utcnow(),
+                "reports": reports,
+                "posts_data": posts,
+                "weekly_posts": weekly_posts,
+                "monthly_posts": monthly_posts
+            }
+            
+            # 插入报告数据
+            result = self.reports_collection.insert_one(report_data)
+            report_id = str(result.inserted_id)
+            
+            logger.info(f"保存报告数据到MongoDB，ID: {report_id}")
+            return report_id
+        
+        except PyMongoError as e:
+            logger.error(f"保存报告数据到MongoDB失败: {e}")
+            raise 

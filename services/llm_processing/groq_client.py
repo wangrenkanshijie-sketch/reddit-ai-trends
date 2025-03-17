@@ -136,13 +136,13 @@ class GroqClient:
         # Generate the analysis
         return self.generate_text(prompt)
     
-    def _create_monthly_popular_table(self, posts: List[Dict[str, Any]], previous_data: Optional[Dict[str, Any]] = None) -> str:
+    def _create_monthly_popular_table(self, posts: List[Dict[str, Any]], previous_report: Optional[Dict[str, Any]] = None) -> str:
         """
         Create a markdown table of popular posts from the last month.
         
         Args:
             posts: List of post dictionaries
-            previous_data: Optional dictionary containing previous report data for comparison
+            previous_report: Optional dictionary containing previous report data for comparison
             
         Returns:
             Markdown table as a string
@@ -155,8 +155,8 @@ class GroqClient:
         
         # Get previous monthly posts if available
         previous_monthly_posts = []
-        if previous_data and 'posts_data' in previous_data:
-            previous_monthly_posts = previous_data.get('monthly_posts', [])
+        if previous_report and 'posts_data' in previous_report:
+            previous_monthly_posts = previous_report.get('monthly_posts', [])
         
         # Create lookup for previous rankings
         previous_rankings = {}
@@ -230,13 +230,13 @@ class GroqClient:
         
         return table
     
-    def _create_weekly_popular_table(self, posts: List[Dict[str, Any]], previous_data: Optional[Dict[str, Any]] = None) -> str:
+    def _create_weekly_popular_table(self, posts: List[Dict[str, Any]], previous_report: Optional[Dict[str, Any]] = None) -> str:
         """
         Create a markdown table of popular posts from the last week.
         
         Args:
             posts: List of post dictionaries
-            previous_data: Optional dictionary containing previous report data for comparison
+            previous_report: Optional dictionary containing previous report data for comparison
             
         Returns:
             Markdown table as a string
@@ -249,8 +249,8 @@ class GroqClient:
         
         # Get previous weekly posts if available
         previous_weekly_posts = []
-        if previous_data and 'posts_data' in previous_data:
-            previous_weekly_posts = previous_data.get('weekly_posts', [])
+        if previous_report and 'posts_data' in previous_report:
+            previous_weekly_posts = previous_report.get('weekly_posts', [])
         
         # Create lookup for previous rankings
         previous_rankings = {}
@@ -405,13 +405,13 @@ class GroqClient:
         
         return table
     
-    def _create_long_term_popular_table(self, posts: List[Dict[str, Any]], previous_data: Optional[Dict[str, Any]] = None) -> str:
+    def _create_long_term_popular_table(self, posts: List[Dict[str, Any]], previous_report: Optional[Dict[str, Any]] = None) -> str:
         """
         Create a table of popular posts from the last week/month with comparison data.
         
         Args:
             posts: List of post dictionaries
-            previous_data: Previous report data for comparison
+            previous_report: Previous report data for comparison
             
         Returns:
             Markdown table as a string
@@ -457,8 +457,8 @@ class GroqClient:
             previous_comments = 0
             
             post_id = post.get('post_id', '')
-            if previous_data and 'posts_data' in previous_data:
-                for prev_post in previous_data['posts_data']:
+            if previous_report and 'posts_data' in previous_report:
+                for prev_post in previous_report['posts_data']:
                     if prev_post.get('post_id') == post_id:
                         previous_score = prev_post.get('score', 0)
                         previous_comments = prev_post.get('num_comments', 0)
@@ -606,7 +606,7 @@ class GroqClient:
         
         return all_tables
     
-    def generate_report(self, posts: List[Dict[str, Any]], previous_data: Optional[Dict[str, Any]] = None, 
+    def generate_report(self, posts: List[Dict[str, Any]], previous_report: Optional[Dict[str, Any]] = None, 
                        weekly_posts: Optional[List[Dict[str, Any]]] = None, 
                        monthly_posts: Optional[List[Dict[str, Any]]] = None,
                        language: str = "en") -> str:
@@ -615,7 +615,7 @@ class GroqClient:
         
         Args:
             posts: List of post dictionaries (24-hour trending posts)
-            previous_data: Previous report data for comparison
+            previous_report: Previous report data for comparison
             weekly_posts: List of weekly popular posts
             monthly_posts: List of monthly popular posts
             language: Language for the report ('en' for English, 'zh' for Chinese)
@@ -628,12 +628,12 @@ class GroqClient:
         # Create monthly popular posts table if provided
         monthly_table = ""
         if monthly_posts:
-            monthly_table = self._create_monthly_popular_table(monthly_posts, previous_data)
+            monthly_table = self._create_monthly_popular_table(monthly_posts, previous_report)
         
         # Create weekly popular posts table if provided
         weekly_table = ""
         if weekly_posts:
-            weekly_table = self._create_weekly_popular_table(weekly_posts, previous_data)
+            weekly_table = self._create_weekly_popular_table(weekly_posts, previous_report)
         
         # Create trending posts table
         trending_table = self._create_trending_posts_table(posts)
