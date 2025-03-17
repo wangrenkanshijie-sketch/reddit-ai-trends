@@ -1,4 +1,3 @@
-
 """
 Groq API Client
 
@@ -154,22 +153,10 @@ class GroqClient:
         # Take top 20 posts
         top_posts = sorted_posts[:20]
         
-        # Get previous monthly posts if available
-        previous_monthly_posts = []
-        if previous_report and 'posts_data' in previous_report:
-            previous_monthly_posts = previous_report.get('monthly_posts', [])
-        
-        # Create lookup for previous rankings
-        previous_rankings = {}
-        for i, post in enumerate(previous_monthly_posts, 1):
-            post_id = post.get('post_id')
-            if post_id:
-                previous_rankings[post_id] = i
-        
         # Create table header
         table = "## Monthly Popular Posts\n\n"
-        table += "| # | Title | Community | Score | Comments | Category | Posted | Previous Rank |\n"
-        table += "|---|-------|-----------|-------|----------|----------|--------|---------------|\n"
+        table += "| # | Title | Community | Score | Comments | Category | Posted |\n"
+        table += "|---|-------|-----------|-------|----------|----------|--------|\n"
         
         # Add rows to table
         for i, post in enumerate(top_posts, 1):
@@ -219,15 +206,12 @@ class GroqClient:
             else:
                 posted_time = 'N/A'
             
-            # Get previous rank
-            post_id = post.get('post_id', '')
-            previous_rank = previous_rankings.get(post_id, 'New')
-            
             # Create post URL
+            post_id = post.get('post_id', '')
             post_url = f"https://www.reddit.com/comments/{post_id}"
             
             # Add row to table
-            table += f"| {i} | [{title}]({post_url}) | {community_link} | {score} | {comments} | {category} | {posted_time} | {previous_rank} |\n"
+            table += f"| {i} | [{title}]({post_url}) | {community_link} | {score} | {comments} | {category} | {posted_time} |\n"
         
         return table
     
@@ -248,22 +232,10 @@ class GroqClient:
         # Take top 20 posts
         top_posts = sorted_posts[:20]
         
-        # Get previous weekly posts if available
-        previous_weekly_posts = []
-        if previous_report and 'posts_data' in previous_report:
-            previous_weekly_posts = previous_report.get('weekly_posts', [])
-        
-        # Create lookup for previous rankings
-        previous_rankings = {}
-        for i, post in enumerate(previous_weekly_posts, 1):
-            post_id = post.get('post_id')
-            if post_id:
-                previous_rankings[post_id] = i
-        
         # Create table header
         table = "## Weekly Popular Posts\n\n"
-        table += "| # | Title | Community | Score | Comments | Category | Posted | Previous Rank |\n"
-        table += "|---|-------|-----------|-------|----------|----------|--------|---------------|\n"
+        table += "| # | Title | Community | Score | Comments | Category | Posted |\n"
+        table += "|---|-------|-----------|-------|----------|----------|--------|\n"
         
         # Add rows to table
         for i, post in enumerate(top_posts, 1):
@@ -313,15 +285,12 @@ class GroqClient:
             else:
                 posted_time = 'N/A'
             
-            # Get previous rank
-            post_id = post.get('post_id', '')
-            previous_rank = previous_rankings.get(post_id, 'New')
-            
             # Create post URL
+            post_id = post.get('post_id', '')
             post_url = f"https://www.reddit.com/comments/{post_id}"
             
             # Add row to table
-            table += f"| {i} | [{title}]({post_url}) | {community_link} | {score} | {comments} | {category} | {posted_time} | {previous_rank} |\n"
+            table += f"| {i} | [{title}]({post_url}) | {community_link} | {score} | {comments} | {category} | {posted_time} |\n"
         
         return table
     
