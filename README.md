@@ -4,6 +4,11 @@
 
 Automatically generate trend reports from AI-related Reddit communities, supporting both English and Chinese languages. Stay up-to-date with the latest developments in the AI field through daily reports.
 
+## Latest Reports (2025-03-16)
+
+- [English Report](reports\2025\03\16\report_20250316_223331_en.md)
+- [Chinese Report](reports\2025\03\16\report_20250316_223331_zh.md)
+
 ## Features
 
 - **Real-time AI Trend Monitoring**: Track emerging AI technologies, discussions, and breakthroughs as they happen
