@@ -6,8 +6,8 @@
 
 ## 最新报告 (2025-03-16)
 
-- [英文报告](reports\2025\03\16\report_20250316_en.md)
-- [中文报告](reports\2025\03\16\report_20250316_zh.md)
+- [英文报告](reports/latest_report_en.md)
+- [中文报告](reports/latest_report_zh.md)
 
 ## 功能特点
 
