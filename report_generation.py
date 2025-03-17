@@ -177,12 +177,13 @@ def update_chinese_readme(report_paths: Dict[str, str], date_str: str) -> None:
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write(readme_content)
 
-def generate_report(languages: List[str] = None) -> Dict[str, str]:
+def generate_report(languages: List[str] = None, skip_mongodb: bool = False) -> Dict[str, str]:
     """
     Generate a report on trending posts from Reddit AI communities.
     
     Args:
         languages: List of language codes to generate reports for
+        skip_mongodb: Whether to skip saving the report to MongoDB
         
     Returns:
         Dictionary mapping language codes to report file paths
@@ -269,7 +270,7 @@ def generate_report(languages: List[str] = None) -> Dict[str, str]:
         
         # Save report to MongoDB
         save_to_db = REPORT_CONFIG.get('save_to_mongodb', True)
-        if save_to_db:
+        if save_to_db and not skip_mongodb:
             mongodb_client.save_report(reports, filtered_posts, weekly_posts, monthly_posts)
             logger.info("Saved report to MongoDB")
         
@@ -282,39 +283,143 @@ def generate_report(languages: List[str] = None) -> Dict[str, str]:
         logger.error(f"Error generating report: {e}", exc_info=True)
         raise
 
-def schedule_report_generation(interval_hours: int = 24) -> None:
+def schedule_report_generation(interval_hours: int = 24, skip_mongodb: bool = False) -> None:
     """
     Schedule report generation to run at specified intervals.
     
     Args:
         interval_hours: Interval in hours between report generation runs
+        skip_mongodb: Whether to skip saving the report to MongoDB
     """
     # Get generation time from config
     generation_time = REPORT_CONFIG.get('generation_time', "06:00")
     
     # Schedule job
     logger.info(f"Scheduling report generation to run daily at {generation_time}")
-    schedule.every().day.at(generation_time).do(generate_report)
+    schedule.every().day.at(generation_time).do(lambda: generate_report(skip_mongodb=skip_mongodb))
     
     # Run immediately if interval is 0
     if interval_hours == 0:
         logger.info("Running report generation immediately")
-        generate_report()
+        generate_report(skip_mongodb=skip_mongodb)
     
     # Keep the script running
     while True:
         schedule.run_pending()
         time.sleep(60)  # Check every minute
 
+def main():
+    """
+    主函数，处理命令行参数并运行报告生成
+    """
+    parser = argparse.ArgumentParser(description='生成Reddit AI趋势报告')
+    parser.add_argument('--languages', nargs='+', default=['en'], 
+                        help='要生成报告的语言代码列表，例如：en zh')
+    parser.add_argument('--skip-mongodb', action='store_true',
+                        help='跳过保存报告到MongoDB')
+    args = parser.parse_args()
+    
+    # 设置日志
+    setup_logging()
+    
+    # 获取配置的语言列表
+    languages = args.languages
+    
+    try:
+        # 初始化服务
+        reddit_collector = RedditDataCollector()
+        report_processor = ReportProcessor()
+        
+        # 收集数据
+        logger.info("开始收集数据...")
+        subreddits = REPORT_CONFIG.get('subreddits', [])
+        
+        # 收集帖子数据
+        posts_per_subreddit = REPORT_CONFIG.get('posts_per_subreddit', 10)
+        posts = reddit_collector.collect_posts(subreddits, posts_per_subreddit, min_comments=10)
+        
+        # 收集每周和每月热门帖子
+        weekly_popular_posts = reddit_collector.collect_weekly_popular_posts(subreddits)
+        monthly_popular_posts = reddit_collector.collect_monthly_popular_posts(subreddits)
+        
+        # 生成报告
+        logger.info(f"开始生成报告，语言: {languages}...")
+        for lang in languages:
+            report = report_processor.generate_report(
+                posts, 
+                weekly_popular_posts, 
+                monthly_popular_posts,
+                language=lang
+            )
+            
+            # 保存报告到文件
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            
+            # 创建年/月/日目录结构
+            current_date = datetime.now()
+            year_dir = str(current_date.year)
+            month_dir = f"{current_date.month:02d}"
+            day_dir = f"{current_date.day:02d}"
+            
+            report_dir = os.path.join("reports", year_dir, month_dir, day_dir)
+            os.makedirs(report_dir, exist_ok=True)
+            
+            report_filename = f"report_{timestamp}_{lang}.md"
+            report_path = os.path.join(report_dir, report_filename)
+            
+            with open(report_path, "w", encoding="utf-8") as f:
+                f.write(report)
+            
+            logger.info(f"报告已保存到: {report_path}")
+            
+            # 创建最新报告的符号链接
+            latest_report_path = os.path.join("reports", f"latest_report_{lang}.md")
+            
+            # 在Windows上，需要特殊处理符号链接
+            if os.path.exists(latest_report_path):
+                os.remove(latest_report_path)
+            
+            # 创建符号链接（在Windows上可能需要管理员权限）
+            try:
+                os.symlink(report_path, latest_report_path)
+                logger.info(f"已创建最新报告的符号链接: {latest_report_path}")
+            except OSError as e:
+                # 如果无法创建符号链接，则复制文件
+                logger.warning(f"无法创建符号链接，将复制文件: {e}")
+                shutil.copy2(report_path, latest_report_path)
+                logger.info(f"已复制最新报告到: {latest_report_path}")
+            
+            # 保存到MongoDB（如果未指定跳过）
+            if not args.skip_mongodb:
+                try:
+                    # 保存报告到MongoDB
+                    mongo_client = MongoDBClient()
+                    report_id = mongo_client.save_report(report, lang)
+                    logger.info(f"报告已保存到MongoDB，ID: {report_id}")
+                except Exception as e:
+                    logger.error(f"保存报告到MongoDB失败: {e}")
+            else:
+                logger.info("已跳过保存报告到MongoDB")
+        
+        # 更新README文件
+        update_readme_with_latest_report()
+        
+        logger.info("报告生成完成")
+        return True
+    except Exception as e:
+        logger.exception(f"报告生成失败: {e}")
+        return False
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate reports on trending posts from Reddit AI communities")
     parser.add_argument("--interval", type=int, default=24, help="Interval in hours between report generation runs")
     parser.add_argument("--languages", nargs="+", default=None, help="Languages to generate reports for (e.g., en zh)")
+    parser.add_argument("--skip-mongodb", action="store_true", help="Skip saving reports to MongoDB")
     args = parser.parse_args()
     
     if args.languages:
         # Run once with specified languages
-        generate_report(args.languages)
+        generate_report(args.languages, skip_mongodb=args.skip_mongodb)
     else:
         # Schedule with default languages from config
-        schedule_report_generation(args.interval) 
+        schedule_report_generation(args.interval, skip_mongodb=args.skip_mongodb) 
