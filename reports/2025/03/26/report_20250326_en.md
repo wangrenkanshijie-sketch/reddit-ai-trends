@@ -4,68 +4,68 @@
 
 | Title | Community | Score | Comments | Category | Posted |
 |-------|-----------|-------|----------|----------|--------|
-| [New Open Ai image gen seems to have no celebrity restrict...](https://www.reddit.com/comments/1jjrikb) | [r/singularity](https://www.reddit.com/r/singularity) | 5422 | 271 | Shitposting | 2025-03-25 19:11 UTC |
-| [A computer made this](https://www.reddit.com/comments/1jjzsmz) | [r/singularity](https://www.reddit.com/r/singularity) | 1937 | 221 | AI | 2025-03-26 01:04 UTC |
-| [Ouch](https://www.reddit.com/comments/1jjmyjv) | [r/singularity](https://www.reddit.com/r/singularity) | 1935 | 180 | Meme | 2025-03-25 16:06 UTC |
-| [I think we’re going to need a bigger bank account.](https://www.reddit.com/comments/1jjorwd) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1389 | 146 | Other | 2025-03-25 17:20 UTC |
-| [Deepseek V3 0324 is now the best non-reasoning model (acr...](https://www.reddit.com/comments/1jjgi8y) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 846 | 126 | News | 2025-03-25 10:47 UTC |
-| [Seeing a lot of cope that this was already possible with ...](https://www.reddit.com/comments/1jjqreg) | [r/singularity](https://www.reddit.com/r/singularity) | 810 | 185 | AI | 2025-03-25 18:40 UTC |
-| [We got competition](https://www.reddit.com/comments/1jjgje5) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 684 | 114 | Funny | 2025-03-25 10:50 UTC |
-| [Just predicting tokens, huh?](https://www.reddit.com/comments/1jjw81o) | [r/singularity](https://www.reddit.com/r/singularity) | 655 | 173 | AI | 2025-03-25 22:23 UTC |
-| [The future is now](https://www.reddit.com/comments/1jk0dwp) | [r/singularity](https://www.reddit.com/r/singularity) | 604 | 51 | Shitposting | 2025-03-26 01:33 UTC |
-| [DeepSeek V3-0324 marks the first time an open weights mod...](https://www.reddit.com/comments/1jjhfdt) | [r/singularity](https://www.reddit.com/r/singularity) | 554 | 52 | AI | 2025-03-25 11:46 UTC |
+| [New Open Ai image gen seems to have no celebrity restrict...](https://www.reddit.com/comments/1jjrikb) | [r/singularity](https://www.reddit.com/r/singularity) | 7080 | 342 | Shitposting | 2025-03-25 19:11 UTC |
+| [A computer made this](https://www.reddit.com/comments/1jjzsmz) | [r/singularity](https://www.reddit.com/r/singularity) | 3464 | 373 | AI | 2025-03-26 01:04 UTC |
+| [Ouch](https://www.reddit.com/comments/1jjmyjv) | [r/singularity](https://www.reddit.com/r/singularity) | 2025 | 189 | Meme | 2025-03-25 16:06 UTC |
+| [I think we’re going to need a bigger bank account.](https://www.reddit.com/comments/1jjorwd) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1588 | 170 | Other | 2025-03-25 17:20 UTC |
+| [Seeing a lot of cope that this was already possible with ...](https://www.reddit.com/comments/1jjqreg) | [r/singularity](https://www.reddit.com/r/singularity) | 872 | 188 | AI | 2025-03-25 18:40 UTC |
+| [Just predicting tokens, huh?](https://www.reddit.com/comments/1jjw81o) | [r/singularity](https://www.reddit.com/r/singularity) | 867 | 229 | AI | 2025-03-25 22:23 UTC |
+| [The future is now](https://www.reddit.com/comments/1jk0dwp) | [r/singularity](https://www.reddit.com/r/singularity) | 862 | 58 | Shitposting | 2025-03-26 01:33 UTC |
+| [Hot Men and Women coming to 4o Image Generation](https://www.reddit.com/comments/1jjsp7l) | [r/singularity](https://www.reddit.com/r/singularity) | 630 | 79 | Shitposting | 2025-03-25 19:59 UTC |
+| [It\'s Perfect](https://www.reddit.com/comments/1jjsg9b) | [r/singularity](https://www.reddit.com/r/singularity) | 601 | 67 | AI | 2025-03-25 19:49 UTC |
+| [Gemini 2.5 Pro benchmarks released](https://www.reddit.com/comments/1jjoeq6) | [r/singularity](https://www.reddit.com/r/singularity) | 567 | 90 | AI | 2025-03-25 17:05 UTC |
 
 
 ## Weekly Popular Posts
 
 | # | Title | Community | Score | Comments | Category | Posted |
 |---|-------|-----------|-------|----------|----------|--------|
-| 1 | [New Open Ai image gen seems to have no celebrity restrict...](https://www.reddit.com/comments/1jjrikb) | [r/singularity](https://www.reddit.com/r/singularity) | 5422 | 271 | Shitposting | 2025-03-25 19:11 UTC |
-| 2 | [\"Sam Altman is probably not sleeping well\" - Kai-Fu Lee](https://www.reddit.com/comments/1jh72gb) | [r/singularity](https://www.reddit.com/r/singularity) | 2419 | 451 | AI | 2025-03-22 12:12 UTC |
-| 3 | [This robot can scan up to 2,500 pages per hour.](https://www.reddit.com/comments/1jgew8b) | [r/singularity](https://www.reddit.com/r/singularity) | 2344 | 173 | Robotics | 2025-03-21 11:45 UTC |
-| 4 | [Boston Dynamics Atlas- Running, Walking, Crawling](https://www.reddit.com/comments/1jexx0k) | [r/singularity](https://www.reddit.com/r/singularity) | 1970 | 234 | AI | 2025-03-19 14:12 UTC |
-| 5 | [A computer made this](https://www.reddit.com/comments/1jjzsmz) | [r/singularity](https://www.reddit.com/r/singularity) | 1935 | 221 | AI | 2025-03-26 01:04 UTC |
-| 6 | [Ouch](https://www.reddit.com/comments/1jjmyjv) | [r/singularity](https://www.reddit.com/r/singularity) | 1934 | 180 | Meme | 2025-03-25 16:06 UTC |
-| 7 | [\"If we confuse users enough, they will overpay\"](https://www.reddit.com/comments/1jgqmlr) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1826 | 77 | Funny | 2025-03-21 20:26 UTC |
-| 8 | [A man, who fell from 4 m high became paraplegic due to sp...](https://www.reddit.com/comments/1jgri16) | [r/singularity](https://www.reddit.com/r/singularity) | 1630 | 116 | Neuroscience | 2025-03-21 21:03 UTC |
-| 9 | [SpatialLM: A large language model designed for spatial un...](https://www.reddit.com/comments/1jgap0q) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1511 | 126 | New Model | 2025-03-21 06:43 UTC |
-| 10 | [I think we’re going to need a bigger bank account.](https://www.reddit.com/comments/1jjorwd) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1390 | 146 | Other | 2025-03-25 17:20 UTC |
-| 11 | [Texas private school’s use of new ‘AI tutor’ rockets stud...](https://www.reddit.com/comments/1ji7cn3) | [r/singularity](https://www.reddit.com/r/singularity) | 1369 | 310 | AI | 2025-03-23 19:23 UTC |
-| 12 | [Yann is still a doubter](https://www.reddit.com/comments/1jfwp9m) | [r/singularity](https://www.reddit.com/r/singularity) | 1358 | 655 | AI | 2025-03-20 19:04 UTC |
-| 13 | [Deepseek v3](https://www.reddit.com/comments/1jj6i4m) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1337 | 172 | News | 2025-03-25 00:19 UTC |
-| 14 | [\"Hey, you have a second for a quick call? It will just t...](https://www.reddit.com/comments/1jiql82) | [r/datascience](https://www.reddit.com/r/datascience) | 1126 | 34 | Monday Meme | 2025-03-24 13:24 UTC |
-| 15 | [60 years ago, Isaac Asimov envisioned a future where huma...](https://www.reddit.com/comments/1jhkqzh) | [r/singularity](https://www.reddit.com/r/singularity) | 1101 | 69 | Robotics | 2025-03-22 22:42 UTC |
-| 16 | [A man can dream](https://www.reddit.com/comments/1jev3fl) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1083 | 121 | Funny | 2025-03-19 11:47 UTC |
-| 17 | [Deepseek releases new V3 checkpoint (V3-0324)](https://www.reddit.com/comments/1jip611) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 942 | 188 | Resources | 2025-03-24 12:12 UTC |
-| 18 | [Nearly 100% of cancer identified by new AI, easily outper...](https://www.reddit.com/comments/1jhcel1) | [r/singularity](https://www.reddit.com/r/singularity) | 878 | 70 | AI | 2025-03-22 16:31 UTC |
-| 19 | [Deepseek V3 0324 is now the best non-reasoning model (acr...](https://www.reddit.com/comments/1jjgi8y) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 847 | 126 | News | 2025-03-25 10:47 UTC |
-| 20 | [SpatialLM: A large language model designed for spatial un...](https://www.reddit.com/comments/1jfr3mi) | [r/singularity](https://www.reddit.com/r/singularity) | 839 | 86 | AI | 2025-03-20 15:09 UTC |
+| 1 | [New Open Ai image gen seems to have no celebrity restrict...](https://www.reddit.com/comments/1jjrikb) | [r/singularity](https://www.reddit.com/r/singularity) | 7078 | 342 | Shitposting | 2025-03-25 19:11 UTC |
+| 2 | [A computer made this](https://www.reddit.com/comments/1jjzsmz) | [r/singularity](https://www.reddit.com/r/singularity) | 3462 | 373 | AI | 2025-03-26 01:04 UTC |
+| 3 | [\"Sam Altman is probably not sleeping well\" - Kai-Fu Lee](https://www.reddit.com/comments/1jh72gb) | [r/singularity](https://www.reddit.com/r/singularity) | 2435 | 451 | AI | 2025-03-22 12:12 UTC |
+| 4 | [This robot can scan up to 2,500 pages per hour.](https://www.reddit.com/comments/1jgew8b) | [r/singularity](https://www.reddit.com/r/singularity) | 2350 | 174 | Robotics | 2025-03-21 11:45 UTC |
+| 5 | [Ouch](https://www.reddit.com/comments/1jjmyjv) | [r/singularity](https://www.reddit.com/r/singularity) | 2027 | 189 | Meme | 2025-03-25 16:06 UTC |
+| 6 | [\"If we confuse users enough, they will overpay\"](https://www.reddit.com/comments/1jgqmlr) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1839 | 77 | Funny | 2025-03-21 20:26 UTC |
+| 7 | [A man, who fell from 4 m high became paraplegic due to sp...](https://www.reddit.com/comments/1jgri16) | [r/singularity](https://www.reddit.com/r/singularity) | 1626 | 116 | Neuroscience | 2025-03-21 21:03 UTC |
+| 8 | [I think we’re going to need a bigger bank account.](https://www.reddit.com/comments/1jjorwd) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1591 | 170 | Other | 2025-03-25 17:20 UTC |
+| 9 | [SpatialLM: A large language model designed for spatial un...](https://www.reddit.com/comments/1jgap0q) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1522 | 126 | New Model | 2025-03-21 06:43 UTC |
+| 10 | [Texas private school’s use of new ‘AI tutor’ rockets stud...](https://www.reddit.com/comments/1ji7cn3) | [r/singularity](https://www.reddit.com/r/singularity) | 1381 | 311 | AI | 2025-03-23 19:23 UTC |
+| 11 | [Deepseek v3](https://www.reddit.com/comments/1jj6i4m) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1357 | 175 | News | 2025-03-25 00:19 UTC |
+| 12 | [Yann is still a doubter](https://www.reddit.com/comments/1jfwp9m) | [r/singularity](https://www.reddit.com/r/singularity) | 1357 | 657 | AI | 2025-03-20 19:04 UTC |
+| 13 | [\"Hey, you have a second for a quick call? It will just t...](https://www.reddit.com/comments/1jiql82) | [r/datascience](https://www.reddit.com/r/datascience) | 1155 | 34 | Monday Meme | 2025-03-24 13:24 UTC |
+| 14 | [60 years ago, Isaac Asimov envisioned a future where huma...](https://www.reddit.com/comments/1jhkqzh) | [r/singularity](https://www.reddit.com/r/singularity) | 1104 | 70 | Robotics | 2025-03-22 22:42 UTC |
+| 15 | [Deepseek releases new V3 checkpoint (V3-0324)](https://www.reddit.com/comments/1jip611) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 943 | 188 | Resources | 2025-03-24 12:12 UTC |
+| 16 | [Nearly 100% of cancer identified by new AI, easily outper...](https://www.reddit.com/comments/1jhcel1) | [r/singularity](https://www.reddit.com/r/singularity) | 879 | 70 | AI | 2025-03-22 16:31 UTC |
+| 17 | [Deepseek V3 0324 is now the best non-reasoning model (acr...](https://www.reddit.com/comments/1jjgi8y) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 872 | 128 | News | 2025-03-25 10:47 UTC |
+| 18 | [Seeing a lot of cope that this was already possible with ...](https://www.reddit.com/comments/1jjqreg) | [r/singularity](https://www.reddit.com/r/singularity) | 868 | 188 | AI | 2025-03-25 18:40 UTC |
+| 19 | [Just predicting tokens, huh?](https://www.reddit.com/comments/1jjw81o) | [r/singularity](https://www.reddit.com/r/singularity) | 866 | 229 | AI | 2025-03-25 22:23 UTC |
+| 20 | [The future is now](https://www.reddit.com/comments/1jk0dwp) | [r/singularity](https://www.reddit.com/r/singularity) | 861 | 58 | Shitposting | 2025-03-26 01:33 UTC |
 
 
 ## Monthly Popular Posts
 
 | # | Title | Community | Score | Comments | Category | Posted |
 |---|-------|-----------|-------|----------|----------|--------|
-| 1 | [Elon Musk\'s AI chatbot says a \'Russian asset\' delivere...](https://www.reddit.com/comments/1j4h545) | [r/singularity](https://www.reddit.com/r/singularity) | 6974 | 226 | AI | 2025-03-05 23:14 UTC |
-| 2 | [Nvidia showcases Blue, a cute little robot powered by the...](https://www.reddit.com/comments/1jeh5cl) | [r/singularity](https://www.reddit.com/r/singularity) | 6292 | 623 | Video | 2025-03-18 21:57 UTC |
-| 3 | [New Open Ai image gen seems to have no celebrity restrict...](https://www.reddit.com/comments/1jjrikb) | [r/singularity](https://www.reddit.com/r/singularity) | 5434 | 271 | Shitposting | 2025-03-25 19:11 UTC |
-| 4 | [Claude gets stuck while playing Pokemon and tries a new s...](https://www.reddit.com/comments/1izeqza) | [r/singularity](https://www.reddit.com/r/singularity) | 3813 | 236 | General AI News | 2025-02-27 12:37 UTC |
-| 5 | [I\'m feeling the AGI](https://www.reddit.com/comments/1jai6th) | [r/singularity](https://www.reddit.com/r/singularity) | 3252 | 195 | Meme | 2025-03-13 17:55 UTC |
-| 6 | [Anthropic CEO, Dario Amodei: in the next 3 to 6 months, A...](https://www.reddit.com/comments/1j8q3qi) | [r/singularity](https://www.reddit.com/r/singularity) | 2436 | 1776 | AI | 2025-03-11 12:57 UTC |
-| 7 | [\"Sam Altman is probably not sleeping well\" - Kai-Fu Lee](https://www.reddit.com/comments/1jh72gb) | [r/singularity](https://www.reddit.com/r/singularity) | 2423 | 451 | AI | 2025-03-22 12:12 UTC |
-| 8 | [This robot can scan up to 2,500 pages per hour.](https://www.reddit.com/comments/1jgew8b) | [r/singularity](https://www.reddit.com/r/singularity) | 2345 | 173 | Robotics | 2025-03-21 11:45 UTC |
-| 9 | [Boston Dynamics Atlas- Running, Walking, Crawling](https://www.reddit.com/comments/1jexx0k) | [r/singularity](https://www.reddit.com/r/singularity) | 1966 | 234 | AI | 2025-03-19 14:12 UTC |
-| 10 | [Finally, a real-time low-latency voice chat model](https://www.reddit.com/comments/1j0n56h) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1956 | 451 | Resources | 2025-03-01 00:47 UTC |
-| 11 | [Ouch](https://www.reddit.com/comments/1jjmyjv) | [r/singularity](https://www.reddit.com/r/singularity) | 1937 | 180 | Meme | 2025-03-25 16:06 UTC |
-| 12 | [\"If we confuse users enough, they will overpay\"](https://www.reddit.com/comments/1jgqmlr) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1828 | 77 | Funny | 2025-03-21 20:26 UTC |
-| 13 | [Gemini is pretty good in removing watermarks](https://www.reddit.com/comments/1jbt0md) | [r/singularity](https://www.reddit.com/r/singularity) | 1825 | 205 | AI | 2025-03-15 11:25 UTC |
-| 14 | [16x 3090s - It\'s alive!](https://www.reddit.com/comments/1j67bxt) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1763 | 369 | Discussion | 2025-03-08 02:43 UTC |
-| 15 | [AI2 releases OLMo 32B - Truly open source](https://www.reddit.com/comments/1jaj6gc) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1756 | 153 | New Model | 2025-03-13 18:35 UTC |
-| 16 | [China is basically trying to produce the entire semicondu...](https://www.reddit.com/comments/1j6ohwr) | [r/singularity](https://www.reddit.com/r/singularity) | 1727 | 449 | Discussion | 2025-03-08 19:13 UTC |
-| 17 | [Claude just beat Mt Moon](https://www.reddit.com/comments/1j1cbxp) | [r/singularity](https://www.reddit.com/r/singularity) | 1711 | 167 | AI | 2025-03-01 23:01 UTC |
-| 18 | [The Sesame voice model has been THE moment for me](https://www.reddit.com/comments/1j12j93) | [r/singularity](https://www.reddit.com/r/singularity) | 1682 | 439 | AI | 2025-03-01 15:54 UTC |
+| 1 | [New Open Ai image gen seems to have no celebrity restrict...](https://www.reddit.com/comments/1jjrikb) | [r/singularity](https://www.reddit.com/r/singularity) | 7072 | 342 | Shitposting | 2025-03-25 19:11 UTC |
+| 2 | [Elon Musk\'s AI chatbot says a \'Russian asset\' delivere...](https://www.reddit.com/comments/1j4h545) | [r/singularity](https://www.reddit.com/r/singularity) | 6971 | 225 | AI | 2025-03-05 23:14 UTC |
+| 3 | [Nvidia showcases Blue, a cute little robot powered by the...](https://www.reddit.com/comments/1jeh5cl) | [r/singularity](https://www.reddit.com/r/singularity) | 6287 | 623 | Video | 2025-03-18 21:57 UTC |
+| 4 | [Claude gets stuck while playing Pokemon and tries a new s...](https://www.reddit.com/comments/1izeqza) | [r/singularity](https://www.reddit.com/r/singularity) | 3822 | 236 | General AI News | 2025-02-27 12:37 UTC |
+| 5 | [I\'m feeling the AGI](https://www.reddit.com/comments/1jai6th) | [r/singularity](https://www.reddit.com/r/singularity) | 3255 | 195 | Meme | 2025-03-13 17:55 UTC |
+| 6 | [\"Sam Altman is probably not sleeping well\" - Kai-Fu Lee](https://www.reddit.com/comments/1jh72gb) | [r/singularity](https://www.reddit.com/r/singularity) | 2434 | 451 | AI | 2025-03-22 12:12 UTC |
+| 7 | [Anthropic CEO, Dario Amodei: in the next 3 to 6 months, A...](https://www.reddit.com/comments/1j8q3qi) | [r/singularity](https://www.reddit.com/r/singularity) | 2433 | 1776 | AI | 2025-03-11 12:57 UTC |
+| 8 | [This robot can scan up to 2,500 pages per hour.](https://www.reddit.com/comments/1jgew8b) | [r/singularity](https://www.reddit.com/r/singularity) | 2350 | 174 | Robotics | 2025-03-21 11:45 UTC |
+| 9 | [Ouch](https://www.reddit.com/comments/1jjmyjv) | [r/singularity](https://www.reddit.com/r/singularity) | 2025 | 189 | Meme | 2025-03-25 16:06 UTC |
+| 10 | [Boston Dynamics Atlas- Running, Walking, Crawling](https://www.reddit.com/comments/1jexx0k) | [r/singularity](https://www.reddit.com/r/singularity) | 1970 | 234 | AI | 2025-03-19 14:12 UTC |
+| 11 | [Finally, a real-time low-latency voice chat model](https://www.reddit.com/comments/1j0n56h) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1961 | 451 | Resources | 2025-03-01 00:47 UTC |
+| 12 | [\"If we confuse users enough, they will overpay\"](https://www.reddit.com/comments/1jgqmlr) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1835 | 77 | Funny | 2025-03-21 20:26 UTC |
+| 13 | [Gemini is pretty good in removing watermarks](https://www.reddit.com/comments/1jbt0md) | [r/singularity](https://www.reddit.com/r/singularity) | 1819 | 205 | AI | 2025-03-15 11:25 UTC |
+| 14 | [16x 3090s - It\'s alive!](https://www.reddit.com/comments/1j67bxt) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1756 | 369 | Discussion | 2025-03-08 02:43 UTC |
+| 15 | [AI2 releases OLMo 32B - Truly open source](https://www.reddit.com/comments/1jaj6gc) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1755 | 153 | New Model | 2025-03-13 18:35 UTC |
+| 16 | [China is basically trying to produce the entire semicondu...](https://www.reddit.com/comments/1j6ohwr) | [r/singularity](https://www.reddit.com/r/singularity) | 1726 | 449 | Discussion | 2025-03-08 19:13 UTC |
+| 17 | [Claude just beat Mt Moon](https://www.reddit.com/comments/1j1cbxp) | [r/singularity](https://www.reddit.com/r/singularity) | 1716 | 167 | AI | 2025-03-01 23:01 UTC |
+| 18 | [The Sesame voice model has been THE moment for me](https://www.reddit.com/comments/1j12j93) | [r/singularity](https://www.reddit.com/r/singularity) | 1691 | 439 | AI | 2025-03-01 15:54 UTC |
 | 19 | [A man, who fell from 4 m high became paraplegic due to sp...](https://www.reddit.com/comments/1jgri16) | [r/singularity](https://www.reddit.com/r/singularity) | 1631 | 116 | Neuroscience | 2025-03-21 21:03 UTC |
-| 20 | [Carnegie Mellon professor: o1 got a perfect score on my m...](https://www.reddit.com/comments/1jbuq6p) | [r/singularity](https://www.reddit.com/r/singularity) | 1614 | 206 | AI | 2025-03-15 13:07 UTC |
+| 20 | [Carnegie Mellon professor: o1 got a perfect score on my m...](https://www.reddit.com/comments/1jbuq6p) | [r/singularity](https://www.reddit.com/r/singularity) | 1620 | 206 | AI | 2025-03-15 13:07 UTC |
 
 
 ## Top Posts by Community (Past Week)
@@ -74,64 +74,64 @@
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Who here has created an agent that makes them money?](https://www.reddit.com/comments/1jjt4vu) | 55 | 52 | Discussion | 2025-03-25 20:16 UTC |
-| [If you’re building agents, this might help you get them h...](https://www.reddit.com/comments/1jjkpjk) | 16 | 12 | Discussion | 2025-03-25 14:30 UTC |
-| [What\'s the most practical everyday use care you\'ve seen...](https://www.reddit.com/comments/1jk5xht) | 11 | 11 | Discussion | 2025-03-26 07:04 UTC |
+| [Who here has created an agent that makes them money?](https://www.reddit.com/comments/1jjt4vu) | 76 | 68 | Discussion | 2025-03-25 20:16 UTC |
+| [What\'s the most practical everyday use care you\'ve seen...](https://www.reddit.com/comments/1jk5xht) | 31 | 23 | Discussion | 2025-03-26 07:04 UTC |
+| [Are we slowly outsourcing our identity to AI?](https://www.reddit.com/comments/1jk32q3) | 11 | 13 | Discussion | 2025-03-26 03:54 UTC |
 
 
 ### r/LLMDevs
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Is the DeepSeek API lying about it\'s max output tokens l...](https://www.reddit.com/comments/1jk0n5p) | 4 | 15 | Discussion | 2025-03-26 01:46 UTC |
+| [Is the DeepSeek API lying about it\'s max output tokens l...](https://www.reddit.com/comments/1jk0n5p) | 5 | 17 | Discussion | 2025-03-26 01:46 UTC |
 
 
 ### r/LangChain
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [RAG on complex structure documents](https://www.reddit.com/comments/1jjpth6) | 56 | 27 | General | 2025-03-25 18:02 UTC |
-| [How to Make LLM Generate Logical JSON Constraints in Lang...](https://www.reddit.com/comments/1jjsp5h) | 3 | 11 | Question | Help | 2025-03-25 19:59 UTC |
+| [RAG on complex structure documents](https://www.reddit.com/comments/1jjpth6) | 75 | 32 | General | 2025-03-25 18:02 UTC |
+| [How to Make LLM Generate Logical JSON Constraints in Lang...](https://www.reddit.com/comments/1jjsp5h) | 3 | 16 | Question | Help | 2025-03-25 19:59 UTC |
 
 
 ### r/LocalLLM
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [I have 13 years of accumulated work email that contains S...](https://www.reddit.com/comments/1jjjzt7) | 60 | 23 | Question | 2025-03-25 13:59 UTC |
-| [Create Your Personal AI Knowledge Assistant - No Coding N...](https://www.reddit.com/comments/1jjtoxf) | 52 | 12 | Discussion | 2025-03-25 20:39 UTC |
+| [Create Your Personal AI Knowledge Assistant - No Coding N...](https://www.reddit.com/comments/1jjtoxf) | 66 | 12 | Discussion | 2025-03-25 20:39 UTC |
 
 
 ### r/LocalLLaMA
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [I think we’re going to need a bigger bank account.](https://www.reddit.com/comments/1jjorwd) | 1389 | 146 | Other | 2025-03-25 17:20 UTC |
-| [Deepseek V3 0324 is now the best non-reasoning model (acr...](https://www.reddit.com/comments/1jjgi8y) | 846 | 126 | News | 2025-03-25 10:47 UTC |
-| [We got competition](https://www.reddit.com/comments/1jjgje5) | 684 | 114 | Funny | 2025-03-25 10:50 UTC |
+| [I think we’re going to need a bigger bank account.](https://www.reddit.com/comments/1jjorwd) | 1588 | 170 | Other | 2025-03-25 17:20 UTC |
+| [we are just 3 months into 2025](https://www.reddit.com/comments/1jjvo4e) | 389 | 58 | Discussion | 2025-03-25 22:00 UTC |
+| [1.78bit DeepSeek-V3-0324 - 230GB Unsloth Dynamic GGUF](https://www.reddit.com/comments/1jk0qjs) | 359 | 83 | Resources | 2025-03-26 01:51 UTC |
 
 
 ### r/MachineLearning
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [\[D\] Scopus listing of Conferences like ICML/ICLR/NeurIPS](https://www.reddit.com/comments/1jjfwoq) | 8 | 15 | Discussion | 2025-03-25 10:06 UTC |
+| [\[D\] Are neural networks outdated?](https://www.reddit.com/comments/1jke8c9) | 0 | 13 | Discussion | 2025-03-26 15:18 UTC |
 
 
-### r/Rag
+### r/datascience
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Building Document search for RAG, for 2000+ documents.&nb...](https://www.reddit.com/comments/1jjkvpp) | 57 | 34 | Discussion | 2025-03-25 14:38 UTC |
+| [Time-series forecasting: ML models perform better than cl...](https://www.reddit.com/comments/1jka8tt) | 35 | 33 | Discussion | 2025-03-26 12:10 UTC |
+| [First Position Job Seeker and DS/MLE/AI Landscape](https://www.reddit.com/comments/1jk8klq) | 0 | 11 | Discussion | 2025-03-26 10:26 UTC |
 
 
 ### r/singularity
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [New Open Ai image gen seems to have no celebrity restrict...](https://www.reddit.com/comments/1jjrikb) | 5422 | 271 | Shitposting | 2025-03-25 19:11 UTC |
-| [A computer made this](https://www.reddit.com/comments/1jjzsmz) | 1937 | 221 | AI | 2025-03-26 01:04 UTC |
-| [Ouch](https://www.reddit.com/comments/1jjmyjv) | 1935 | 180 | Meme | 2025-03-25 16:06 UTC |
+| [New Open Ai image gen seems to have no celebrity restrict...](https://www.reddit.com/comments/1jjrikb) | 7080 | 342 | Shitposting | 2025-03-25 19:11 UTC |
+| [A computer made this](https://www.reddit.com/comments/1jjzsmz) | 3464 | 373 | AI | 2025-03-26 01:04 UTC |
+| [Ouch](https://www.reddit.com/comments/1jjmyjv) | 2025 | 189 | Meme | 2025-03-25 16:06 UTC |
 
 
 
@@ -140,66 +140,34 @@
 
 
 
-### **AI Reddit Trend Analysis Report - 2025-03-26**
+### AI Reddit Trend Analysis Report - 2025-03-26
 
 ---
 
-### **1. Today's Highlights**
+### 1. Today's Highlights: Emerging Trends and Breakthroughs
 
-The past 24 hours have seen significant developments in AI, particularly in image generation and model performance:
+The past 24 hours have seen significant developments in AI, particularly in image generation and creative applications. The top post, "[New Open Ai image gen seems to have no celebrity restrict...](https://www.reddit.com/comments/1jjrikb)," highlights a breakthrough in AI's ability to generate images without prior celebrity restrictions. This advancement indicates a potential shift in content creation, raising both creative possibilities and ethical concerns. The high engagement (7,080 upvotes, 342 comments) underscores its impact.
 
-- **Open AI Image Generation Without Celebrity Restrictions**: A post in r/singularity highlights that Open AI's new image generation model lacks celebrity restrictions, sparking discussions on ethical implications and creative possibilities. This is a notable shift from previous models that had stricter content policies.
+Another notable trend is the showcase of AI creativity, with a post titled "[A computer made this](https://www.reddit.com/comments/1jjzsmz)" garnering 3,464 upvotes. This reflects the community's fascination with AI's artistic capabilities, suggesting a growing interest in AI-generated content beyond functional applications.
 
-- **DeepSeek V3-0324 Model**: Announced in r/LocalLLaMA, this model is now the best non-reasoning model, indicating advancements in specific task performance rather than general AI capabilities.
+The financial aspects of AI development are also emerging, as seen in "[I think we’re going to need a bigger bank account.](https://www.reddit.com/comments/1jjorwd)" from r/LocalLLaMA. This post (1,588 upvotes) points to discussions around the increasing costs of advanced AI models, indicating a shift towards accessibility and resource considerations.
 
-- **Cost of Local LLaMA Setup**: A meme in r/LocalLLaMA humorously points out the financial burden of running these models locally, reflecting community concerns about accessibility and resource requirements.
+### 2. Weekly Trend Comparison: Persistence and Emergence
 
-These trends highlight new developments in model capabilities and accessibility, differing from previous focuses on general AI and robotics.
+The weekly trends show persistence in AI creativity and image generation, with the top posts mirroring the daily highlights. However, new discussions around financial aspects and model costs are emerging, reflecting growing concerns about resource accessibility as models become more complex.
 
----
+### 3. Monthly Technology Evolution: Progression and Applications
 
-### **2. Weekly Trend Comparison**
+Over the month, the focus has shifted from model releases to practical applications, including education and neuroscience. The sustained interest in Open AI's image generation underscores the maturation of AI in content creation, with discussions evolving from technical capabilities to ethical implications.
 
-- **Persistent Trends**: Discussions on models like Claude and Gemini, as well as AI tutors, remain popular, showing sustained interest in practical applications and model advancements.
+### 4. Technical Deep Dive: Open AI Image Generation
 
-- **New Trends**: The emergence of DeepSeek V3 and Open AI's image generation without celebrity restrictions indicates a shift towards model specificity and ethical considerations.
+The removal of celebrity restrictions in Open AI's image generation likely involves advanced models like GANs or diffusion models, allowing generation without specific training data. This breakthrough democratizes image creation but raises privacy concerns, making it a significant development for professionals in content creation and ethics.
 
-This shift reflects a community focus on both the capabilities and implications of AI technologies.
+### 5. Community Highlights: Diverse Interests Across Subreddits
 
----
+- **r/singularity**: Focuses on general AI advancements and community engagement through memes.
+- **r/LocalLLaMA**: Discusses model releases and financial aspects, highlighting resource accessibility.
+- **r/LangChain**: Explores niche applications like RAG, indicating specialized interests.
 
-### **3. Monthly Technology Evolution**
-
-- **Progress in Model Development**: Monthly trends showed introductions of models like Claude and Gemini, while current trends highlight DeepSeek V3, indicating a progression towards more specialized and powerful models.
-
-- **Increased Focus on Accessibility**: Discussions on local setups and costs suggest a growing interest in making AI more accessible, moving beyond just model introductions.
-
-This evolution shows the AI field moving towards both enhanced performance and broader accessibility.
-
----
-
-### **4. Technical Deep Dive: DeepSeek V3-0324**
-
-- **Overview**: DeepSeek V3-0324 is a state-of-the-art model excelling in non-reasoning tasks, offering high performance in specific areas without general reasoning capabilities.
-
-- **Importance**: Its specialized performance indicates a strategic shift towards task-specific optimization, valuable for industries requiring high accuracy in defined tasks.
-
-- **Broader Impact**: This model exemplifies the trend towards models designed for particular applications, contrasting with general AI developments.
-
----
-
-### **5. Community Highlights**
-
-- **r/singularity**: Focuses on model advancements and ethical discussions, with posts on Open AI's image generation and DeepSeek V3.
-
-- **r/LocalLLaMA**: Discusses local model setups and costs, reflecting practical concerns among enthusiasts.
-
-- **Smaller Communities**: r/AI_Agents and r/LangChain explore niche areas like AI agents and RAG applications, showing diverse interests beyond mainstream topics.
-
-These community discussions illustrate a broad spectrum of AI engagement, from theoretical models to practical applications.
-
----
-
-### **Conclusion**
-
-Today's highlights underscore advancements in AI capabilities and accessibility, with a focus on ethical considerations. Weekly and monthly trends show a progression from general models to specialized, accessible technologies. This analysis provides insights into the dynamic and evolving AI landscape, emphasizing the need for professionals to stay informed on both technical and ethical fronts.
+This analysis provides insights into the dynamic AI landscape, emphasizing creativity, ethics, and accessibility, with implications for professionals across various fields.
