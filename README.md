@@ -1,4 +1,5 @@
 # Reddit AI Trend Reports
+(Will recover soon, internet services interuption.)
 
 [English](README.md) | [中文](README_CN.md)
 
