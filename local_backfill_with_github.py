@@ -86,29 +86,130 @@ def backfill_report(target_date_str, hours=24, push_to_github=False):
         # 解析日期字符串
         target_date = datetime.strptime(target_date_str, "%Y-%m-%d")
         
-        # 使用backfill模块生成报告
-        success = generate_report_for_date(
-            target_date=target_date,
-            hours=hours,
-            push_to_github=False  # 这里设为False，我们将在后面手动处理GitHub提交
+        # 初始化服务
+        from services.reddit_collection.collector import RedditDataCollector
+        from services.llm_processing.report_processor import ReportProcessor
+        from database.mongodb import MongoDBClient
+        from config import REPORT_CONFIG
+        from report_generation import create_report_directory_structure, update_readme_with_latest_report
+        
+        # 使用Reddit收集器获取数据
+        reddit_collector = RedditDataCollector()
+        report_processor = ReportProcessor()
+        mongodb_client = MongoDBClient()
+        
+        # 计算时间范围
+        end_time = target_date
+        start_time_range = end_time - timedelta(hours=hours)
+        logger.info(f"收集帖子，时间范围: {start_time_range} 到 {end_time}")
+        
+        # 使用配置中的subreddits
+        subreddits = REPORT_CONFIG.get('subreddits', [])
+        posts_per_subreddit = REPORT_CONFIG.get('posts_per_subreddit', 30)
+        languages = REPORT_CONFIG.get('languages', ["en", "zh"])
+        
+        # 收集所有帖子
+        all_posts = []
+        for subreddit in subreddits:
+            posts = reddit_collector.get_subreddit_posts(
+                subreddit=subreddit,
+                limit=posts_per_subreddit,
+                time_filter="week"
+            )
+            # 根据时间范围过滤帖子
+            filtered_by_time = []
+            for post in posts:
+                post_time = post.get('created_utc')
+                if isinstance(post_time, str):
+                    try:
+                        post_time = datetime.fromisoformat(post_time.replace('Z', '+00:00'))
+                    except ValueError:
+                        continue
+                if post_time and start_time_range <= post_time <= end_time:
+                    filtered_by_time.append(post)
+            
+            all_posts.extend(filtered_by_time)
+        
+        # 过滤评论数大于10的帖子
+        filtered_posts = [post for post in all_posts if post.get('num_comments', 0) > 10]
+        logger.info(f"过滤后得到 {len(filtered_posts)} 个帖子")
+        
+        # 获取周报和月报数据
+        weekly_posts = reddit_collector.get_weekly_popular_posts(subreddits)
+        monthly_posts = reddit_collector.get_monthly_popular_posts(subreddits)
+        
+        # 获取上一个报告作为比较
+        previous_report = mongodb_client.get_latest_report()
+        
+        # 生成多语言报告
+        reports = report_processor.generate_multilingual_reports(
+            filtered_posts, 
+            previous_report, 
+            weekly_posts, 
+            monthly_posts,
+            languages,
+            save_to_file=False  # 我们将自己处理文件保存
         )
         
-        if success:
-            # 构建报告目录路径
-            year = target_date.year
-            month = f"{target_date.month:02d}"
-            day = f"{target_date.day:02d}"
-            report_dir = os.path.join("reports", str(year), month, day)
+        # 创建目录结构
+        year = target_date.year
+        month = f"{target_date.month:02d}"
+        day = f"{target_date.day:02d}"
+        report_dir = os.path.join("reports", str(year), month, day)
+        os.makedirs(report_dir, exist_ok=True)
+        logger.info(f"创建目录: {report_dir}")
+        
+        # 保存报告到文件
+        report_paths = {}
+        timestamp = target_date.strftime("%Y%m%d_%H%M%S")
+        
+        for lang, report in reports.items():
+            # 创建文件名
+            filename = f"report_{timestamp}_{lang}.md"
+            filepath = os.path.join(report_dir, filename)
             
-            if os.path.exists(report_dir):
-                logger.info(f"报告生成成功，保存在: {report_dir}")
-                return True, report_dir
-            else:
-                logger.error(f"报告似乎生成成功，但目录不存在: {report_dir}")
-                return False, None
-        else:
-            logger.error("报告生成失败")
-            return False, None
+            # 保存报告到文件
+            with open(filepath, "w", encoding="utf-8") as f:
+                # 处理不同格式的报告
+                if isinstance(report, dict):
+                    if "content" in report:
+                        f.write(report["content"])
+                    else:
+                        f.write(str(report))
+                else:
+                    f.write(report)
+            
+            logger.info(f"保存 {lang} 报告到 {filepath}")
+            
+            # 创建最新报告的符号链接
+            latest_path = os.path.join("reports", f"latest_report_{lang}.md")
+            if os.path.exists(latest_path):
+                try:
+                    os.remove(latest_path)
+                except Exception as e:
+                    logger.warning(f"无法删除旧链接: {e}")
+            
+            # 复制文件而不是创建符号链接
+            try:
+                import shutil
+                shutil.copy2(filepath, latest_path)
+                logger.info(f"复制文件到: {latest_path}")
+            except Exception as e:
+                logger.error(f"复制文件失败: {e}")
+            
+            report_paths[lang] = filepath
+        
+        # 更新README文件
+        update_readme_with_latest_report(report_paths)
+        
+        # 保存到MongoDB
+        if isinstance(reports, dict):
+            mongodb_client.save_report(reports, filtered_posts, weekly_posts, monthly_posts)
+            logger.info("保存报告到MongoDB")
+        
+        logger.info(f"报告成功生成在: {report_dir}")
+        return True, report_dir
+        
     except Exception as e:
         logger.error(f"回填报告生成失败: {e}", exc_info=True)
         return False, None

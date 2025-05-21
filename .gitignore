@@ -151,6 +151,4 @@ report_generation.log
 backfill_test.py
 backfill_report_*.md
 *_test_local.py
-*_local_*.py
-local_*.py
 test_local_*.py 
