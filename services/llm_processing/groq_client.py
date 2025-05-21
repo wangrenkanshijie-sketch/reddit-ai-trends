@@ -579,7 +579,8 @@ class GroqClient:
     def generate_report(self, posts: List[Dict[str, Any]], previous_report: Optional[Dict[str, Any]] = None, 
                        weekly_posts: Optional[List[Dict[str, Any]]] = None, 
                        monthly_posts: Optional[List[Dict[str, Any]]] = None,
-                       language: str = "en") -> str:
+                       language: str = "en",
+                       reference_date: Optional[datetime] = None) -> str:
         """
         Generate a report from Reddit posts using the Groq API.
         
@@ -589,11 +590,16 @@ class GroqClient:
             weekly_posts: List of weekly popular posts
             monthly_posts: List of monthly popular posts
             language: Language for the report ('en' for English, 'zh' for Chinese)
+            reference_date: Optional specific date to generate report for (defaults to current date)
             
         Returns:
             Generated report as a string
         """
         logger.info(f"Generating report from {len(posts)} posts using Groq API in {language} language")
+        
+        # Use reference date or current date
+        report_date = reference_date if reference_date is not None else datetime.now()
+        current_date = report_date.strftime("%Y-%m-%d")
         
         # Create monthly popular posts table if provided
         monthly_table = ""
@@ -624,9 +630,6 @@ class GroqClient:
                 "subreddit": post.get('subreddit', ''),
                 "link_flair_text": post.get('link_flair_text', '')
             })
-        
-        # Get current date
-        current_date = datetime.now().strftime("%Y-%m-%d")
         
         # Define language-specific content
         if language == "zh":
@@ -735,7 +738,8 @@ class GroqClient:
     def generate_multilingual_reports(self, posts: List[Dict[str, Any]], previous_data: Optional[Dict[str, Any]] = None, 
                                      weekly_posts: Optional[List[Dict[str, Any]]] = None, 
                                      monthly_posts: Optional[List[Dict[str, Any]]] = None,
-                                     languages: List[str] = ["en", "zh"]) -> Dict[str, str]:
+                                     languages: List[str] = ["en", "zh"],
+                                     reference_date: Optional[datetime] = None) -> Dict[str, str]:
         """
         Generate reports in multiple languages.
         
@@ -745,6 +749,7 @@ class GroqClient:
             weekly_posts: List of weekly popular posts
             monthly_posts: List of monthly popular posts
             languages: List of language codes to generate reports for
+            reference_date: Optional specific date to generate report for (defaults to current date)
             
         Returns:
             Dictionary mapping language codes to generated reports
@@ -753,6 +758,6 @@ class GroqClient:
         
         for lang in languages:
             logger.info(f"Generating report in {lang} language")
-            report = self.generate_report(posts, previous_data, weekly_posts, monthly_posts, language=lang)
+            report = self.generate_report(posts, previous_data, weekly_posts, monthly_posts, language=lang, reference_date=reference_date)
             reports[lang] = report
             

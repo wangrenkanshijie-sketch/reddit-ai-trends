@@ -148,7 +148,8 @@ def backfill_report(target_date_str, hours=24, push_to_github=False):
             weekly_posts, 
             monthly_posts,
             languages,
-            save_to_file=False  # 我们将自己处理文件保存
+            save_to_file=False,  # 我们将自己处理文件保存
+            reference_date=target_date  # 传递目标日期作为参考日期
         )
         
         # 创建目录结构

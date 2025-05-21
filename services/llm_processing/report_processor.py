@@ -33,7 +33,8 @@ class ReportProcessor:
                        previous_report: Optional[Dict[str, Any]] = None,
                        weekly_posts: Optional[List[Dict[str, Any]]] = None,
                        monthly_posts: Optional[List[Dict[str, Any]]] = None,
-                       language: str = "en") -> Dict[str, Any]:
+                       language: str = "en",
+                       reference_date: Optional[datetime] = None) -> Dict[str, Any]:
         """
         Generate a report based on Reddit posts.
         
@@ -43,6 +44,7 @@ class ReportProcessor:
             weekly_posts: List of weekly popular posts
             monthly_posts: List of monthly popular posts
             language: Language for the report ('en' for English, 'zh' for Chinese)
+            reference_date: Optional specific date to generate report for (defaults to current date)
             
         Returns:
             Report dictionary
@@ -55,11 +57,12 @@ class ReportProcessor:
             previous_report, 
             weekly_posts, 
             monthly_posts,
-            language=language
+            language=language,
+            reference_date=reference_date
         )
         
         # Create the report object
-        timestamp = datetime.utcnow()
+        timestamp = reference_date if reference_date is not None else datetime.utcnow()
         
         # Set language-specific title format
         if language == "zh":
@@ -88,7 +91,8 @@ class ReportProcessor:
                                      weekly_posts: Optional[List[Dict[str, Any]]] = None,
                                      monthly_posts: Optional[List[Dict[str, Any]]] = None,
                                      languages: List[str] = ["en", "zh"],
-                                     save_to_file: bool = True) -> Dict[str, Dict[str, Any]]:
+                                     save_to_file: bool = True,
+                                     reference_date: Optional[datetime] = None) -> Dict[str, Dict[str, Any]]:
         """
         Generate reports in multiple languages.
         
@@ -99,6 +103,7 @@ class ReportProcessor:
             monthly_posts: List of monthly popular posts
             languages: List of language codes to generate reports for
             save_to_file: Whether to save the reports to files
+            reference_date: Optional specific date to generate report for (defaults to current date)
             
         Returns:
             Dictionary mapping language codes to report dictionaries
@@ -112,7 +117,8 @@ class ReportProcessor:
                 previous_report, 
                 weekly_posts, 
                 monthly_posts, 
-                language=lang
+                language=lang,
+                reference_date=reference_date
             )
             reports[lang] = report
             
