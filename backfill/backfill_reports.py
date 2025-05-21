@@ -156,7 +156,7 @@ report = generate_report(
     hours=hours,
     save_to_db=True,
     save_to_file=True,
-    push_to_github={str(push_to_github).lower()},
+    push_to_github={str(push_to_github).lower() == 'true'},
     reference_date=reference_date
 )
 
