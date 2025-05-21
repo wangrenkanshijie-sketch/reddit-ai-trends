@@ -165,24 +165,6 @@ def backfill_report(target_date_str, hours=24, push_to_github=False):
         date_str = target_date.strftime("%Y%m%d")
         
         for lang, report in reports.items():
-            # 获取报告内容
-            report_content = None
-            if isinstance(report, dict):
-                if "content" in report:
-                    report_content = report["content"]
-            else:
-                report_content = report
-            
-            if report_content:
-                # 获取当前日期字符串格式
-                current_date = datetime.now().strftime("%Y-%m-%d")
-                # 获取目标日期字符串格式
-                target_date_formatted = target_date.strftime("%Y-%m-%d")
-                
-                # 替换日期 - 英文格式
-                report_content = report_content.replace(f"- {current_date}", f"- {target_date_formatted}")
-                report_content = report_content.replace(f"Report - {current_date}", f"Report - {target_date_formatted}")
-            
             # 创建文件名，去掉时间戳部分
             filename = f"report_{date_str}_{lang}.md"
             filepath = os.path.join(report_dir, filename)
@@ -200,28 +182,12 @@ def backfill_report(target_date_str, hours=24, push_to_github=False):
             
             logger.info(f"保存 {lang} 报告到 {filepath}")
             
-            # 创建最新报告的符号链接
-            latest_path = os.path.join("reports", f"latest_report_{lang}.md")
-            if os.path.exists(latest_path):
-                try:
-                    os.remove(latest_path)
-                except Exception as e:
-                    logger.warning(f"无法删除旧链接: {e}")
-            
-            # 复制文件而不是创建符号链接
-            try:
-                import shutil
-                shutil.copy2(filepath, latest_path)
-                logger.info(f"复制文件到: {latest_path}")
-            except Exception as e:
-                logger.error(f"复制文件失败: {e}")
-            
+            # 记录报告路径以便后续使用
             report_paths[lang] = filepath
         
-        # 更新README文件
-        update_readme_with_latest_report(report_paths)
-        
-        # 保存到MongoDB
+        # 不再更新 latest_report 链接，因为这是回填的历史报告
+        # 也不再更新 README 文件
+        # 但仍然保存到 MongoDB，用于历史记录
         if isinstance(reports, dict):
             mongodb_client.save_report(reports, filtered_posts, weekly_posts, monthly_posts)
             logger.info("保存报告到MongoDB")
@@ -285,12 +251,8 @@ def commit_to_github(report_dir, date_str):
         run_command(f"git add reports/.gitkeep")
         run_command(f"git add -f {report_dir}")
         
-        # 添加latest_report文件
-        run_command(f"git add -f reports/latest_report_en.md")
-        run_command(f"git add -f reports/latest_report_zh.md")
-        
-        # 添加README.md和README_CN.md（它们会被自动更新）
-        run_command("git add README.md README_CN.md")
+        # 不再添加 latest_report 文件
+        # 也不再更新 README 文件
         
         # 提交更改
         run_command(f'git commit -m "Add backfilled reports for {date_str}"')
