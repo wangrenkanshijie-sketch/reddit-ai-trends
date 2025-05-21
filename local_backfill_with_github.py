@@ -164,6 +164,24 @@ def backfill_report(target_date_str, hours=24, push_to_github=False):
         date_str = target_date.strftime("%Y%m%d")
         
         for lang, report in reports.items():
+            # 获取报告内容
+            report_content = None
+            if isinstance(report, dict):
+                if "content" in report:
+                    report_content = report["content"]
+            else:
+                report_content = report
+            
+            if report_content:
+                # 获取当前日期字符串格式
+                current_date = datetime.now().strftime("%Y-%m-%d")
+                # 获取目标日期字符串格式
+                target_date_formatted = target_date.strftime("%Y-%m-%d")
+                
+                # 替换日期 - 英文格式
+                report_content = report_content.replace(f"- {current_date}", f"- {target_date_formatted}")
+                report_content = report_content.replace(f"Report - {current_date}", f"Report - {target_date_formatted}")
+            
             # 创建文件名，去掉时间戳部分
             filename = f"report_{date_str}_{lang}.md"
             filepath = os.path.join(report_dir, filename)
