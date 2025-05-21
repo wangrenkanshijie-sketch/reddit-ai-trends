@@ -230,8 +230,10 @@ def backfill_reports(start_date_str: str, end_date_str: str, interval_hours: int
 def main():
     """主函数"""
     parser = argparse.ArgumentParser(description="补充生成缺失的报告")
-    parser.add_argument("--start", required=True, help="开始日期 (YYYY-MM-DD)")
-    parser.add_argument("--end", required=True, help="结束日期 (YYYY-MM-DD)")
+    
+    # 修改参数，使 start 和 end 不再是必需的
+    parser.add_argument("--start", help="开始日期 (YYYY-MM-DD)")
+    parser.add_argument("--end", help="结束日期 (YYYY-MM-DD)")
     parser.add_argument("--interval", type=int, default=24, help="报告间隔小时数")
     parser.add_argument("--push", action="store_true", help="推送报告到GitHub")
     parser.add_argument("--force", action="store_true", help="强制重新生成已存在的报告")
@@ -258,10 +260,11 @@ def main():
                 logger.error(f"生成 {args.single_date} 的报告失败")
         except ValueError:
             logger.error(f"无效的日期格式: {args.single_date}，请使用 YYYY-MM-DD 格式")
-    else:
-        # 否则，生成日期范围内的报告
+    # 否则，检查是否提供了 start 和 end
+    elif args.start and args.end:
         backfill_reports(args.start, args.end, args.interval, args.push, args.force)
-
+    else:
+        parser.error("必须提供 --single-date 或同时提供 --start 和 --end 参数")
     # 示例用法:
     # 1. 生成特定日期的报告:
     #    python backfill/backfill_reports.py --single-date 2023-09-15
