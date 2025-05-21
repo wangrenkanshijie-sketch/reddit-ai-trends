@@ -175,13 +175,23 @@ def update_chinese_readme(report_paths: Dict[str, str], date_str: str) -> None:
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write(readme_content)
 
-def generate_report(languages: List[str] = None, skip_mongodb: bool = False) -> Dict[str, str]:
+def generate_report(languages: List[str] = None, skip_mongodb: bool = False,
+                   reference_date: Optional[datetime] = None, 
+                   hours: int = 24,
+                   save_to_db: bool = True,
+                   save_to_file: bool = True,
+                   push_to_github: bool = False) -> Dict[str, str]:
     """
     Generate a report on trending posts from Reddit AI communities.
     
     Args:
         languages: List of language codes to generate reports for
         skip_mongodb: Whether to skip saving the report to MongoDB
+        reference_date: Optional specific date to generate report for (defaults to current time)
+        hours: Number of hours to look back for posts
+        save_to_db: Whether to save the report to MongoDB
+        save_to_file: Whether to save the report to file
+        push_to_github: Whether to push the report to GitHub
         
     Returns:
         Dictionary mapping language codes to report file paths
@@ -191,6 +201,10 @@ def generate_report(languages: List[str] = None, skip_mongodb: bool = False) -> 
     
     logger.info(f"Starting report generation for languages: {languages}")
     start_time = time.time()
+    
+    # 使用参考日期或当前时间
+    current_time = reference_date if reference_date is not None else datetime.now()
+    logger.info(f"Using reference date: {current_time.strftime('%Y-%m-%d %H:%M:%S')}")
     
     try:
         # Initialize services
@@ -205,6 +219,11 @@ def generate_report(languages: List[str] = None, skip_mongodb: bool = False) -> 
         # Collect data
         logger.info(f"Collecting data from subreddits: {subreddits}")
         
+        # 计算时间范围 - 使用参考日期
+        end_time = current_time
+        start_time_range = end_time - timedelta(hours=hours)
+        logger.info(f"Collecting posts from {start_time_range} to {end_time}")
+        
         # 收集所有帖子
         all_posts = []
         for subreddit in subreddits:
@@ -213,13 +232,25 @@ def generate_report(languages: List[str] = None, skip_mongodb: bool = False) -> 
                 limit=posts_per_subreddit,
                 time_filter="week"
             )
-            all_posts.extend(posts)
+            # 根据参考时间过滤帖子
+            filtered_by_time = []
+            for post in posts:
+                post_time = post.get('created_utc')
+                if isinstance(post_time, str):
+                    try:
+                        post_time = datetime.fromisoformat(post_time.replace('Z', '+00:00'))
+                    except ValueError:
+                        continue
+                if post_time and start_time_range <= post_time <= end_time:
+                    filtered_by_time.append(post)
+            
+            all_posts.extend(filtered_by_time)
         
         # Filter posts with more than 10 comments
         filtered_posts = [post for post in all_posts if post.get('num_comments', 0) > 10]
         logger.info(f"Filtered {len(filtered_posts)} posts with more than 10 comments from {len(all_posts)} total posts")
         
-        # Get weekly and monthly popular posts
+        # Get weekly and monthly popular posts - 也需要根据参考日期调整
         weekly_posts = reddit_collector.get_weekly_popular_posts(subreddits)
         monthly_posts = reddit_collector.get_monthly_popular_posts(subreddits)
         
@@ -232,15 +263,16 @@ def generate_report(languages: List[str] = None, skip_mongodb: bool = False) -> 
             previous_report, 
             weekly_posts, 
             monthly_posts,
-            languages
+            languages,
+            save_to_file=save_to_file
         )
         
-        # Create directory structure
+        # Create directory structure - 使用参考日期
         report_dir = create_report_directory_structure()
         
         # Save reports to files
         report_paths = {}
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        timestamp = current_time.strftime("%Y%m%d_%H%M%S")
         
         for lang, report in reports.items():
             # Create filename
@@ -248,38 +280,50 @@ def generate_report(languages: List[str] = None, skip_mongodb: bool = False) -> 
             filepath = os.path.join(report_dir, filename)
             
             # Save report to file
-            with open(filepath, "w", encoding="utf-8") as f:
-                f.write(report)
+            if save_to_file:
+                with open(filepath, "w", encoding="utf-8") as f:
+                    f.write(report)
             
-            # Create symlink for latest report
-            latest_path = os.path.join("reports", f"latest_report_{lang}.md")
-            if os.path.exists(latest_path):
-                if os.path.islink(latest_path):
-                    os.unlink(latest_path)
-                else:
-                    os.remove(latest_path)
+                # Create symlink for latest report
+                latest_path = os.path.join("reports", f"latest_report_{lang}.md")
+                if os.path.exists(latest_path):
+                    if os.path.islink(latest_path):
+                        os.unlink(latest_path)
+                    else:
+                        os.remove(latest_path)
             
-            # Create relative path for symlink
-            rel_path = os.path.relpath(filepath, os.path.dirname(latest_path))
-            try:
-                os.symlink(rel_path, latest_path)
-                logger.info(f"Created symlink from {rel_path} to {latest_path}")
-            except Exception as e:
-                # On Windows, symlinks might not work without admin privileges
-                logger.warning(f"Could not create symlink: {e}. Copying file instead.")
-                shutil.copy2(filepath, latest_path)
+                # Create relative path for symlink
+                rel_path = os.path.relpath(filepath, os.path.dirname(latest_path))
+                try:
+                    os.symlink(rel_path, latest_path)
+                    logger.info(f"Created symlink from {rel_path} to {latest_path}")
+                except Exception as e:
+                    # On Windows, symlinks might not work without admin privileges
+                    logger.warning(f"Could not create symlink: {e}. Copying file instead.")
+                    shutil.copy2(filepath, latest_path)
             
             report_paths[lang] = filepath
             logger.info(f"Saved {lang} report to {filepath}")
         
         # Update README with links to latest reports
-        update_readme_with_latest_report(report_paths)
+        if save_to_file:
+            update_readme_with_latest_report(report_paths)
         
         # Save report to MongoDB
-        save_to_db = REPORT_CONFIG.get('save_to_mongodb', True)
         if save_to_db and not skip_mongodb:
             mongodb_client.save_report(reports, filtered_posts, weekly_posts, monthly_posts)
             logger.info("Saved report to MongoDB")
+        
+        # 添加 GitHub 推送支持
+        if push_to_github:
+            try:
+                from utils.github_utils import push_report_to_github
+                push_report_to_github(report_paths)
+                logger.info("Pushed report to GitHub")
+            except ImportError:
+                logger.warning("GitHub utils not found. Skipping GitHub push.")
+            except Exception as e:
+                logger.error(f"Error pushing to GitHub: {e}")
         
         end_time = time.time()
         logger.info(f"Report generation completed in {end_time - start_time:.2f} seconds")

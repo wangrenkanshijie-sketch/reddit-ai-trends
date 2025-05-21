@@ -235,9 +235,45 @@ def main():
     parser.add_argument("--interval", type=int, default=24, help="报告间隔小时数")
     parser.add_argument("--push", action="store_true", help="推送报告到GitHub")
     parser.add_argument("--force", action="store_true", help="强制重新生成已存在的报告")
+    parser.add_argument("--single-date", help="单独生成特定日期的报告 (YYYY-MM-DD)")
     
     args = parser.parse_args()
-    backfill_reports(args.start, args.end, args.interval, args.push, args.force)
+    
+    # 如果指定了单独日期，只生成该日期的报告
+    if args.single_date:
+        try:
+            target_date = datetime.strptime(args.single_date, "%Y-%m-%d")
+            logger.info(f"生成特定日期的报告: {args.single_date}")
+            
+            # 为特定时间生成报告
+            success = generate_report_for_date(
+                target_date=target_date,
+                hours=args.interval,
+                push_to_github=args.push
+            )
+            
+            if success:
+                logger.info(f"成功生成 {args.single_date} 的报告")
+            else:
+                logger.error(f"生成 {args.single_date} 的报告失败")
+        except ValueError:
+            logger.error(f"无效的日期格式: {args.single_date}，请使用 YYYY-MM-DD 格式")
+    else:
+        # 否则，生成日期范围内的报告
+        backfill_reports(args.start, args.end, args.interval, args.push, args.force)
+
+    # 示例用法:
+    # 1. 生成特定日期的报告:
+    #    python backfill/backfill_reports.py --single-date 2023-09-15
+    #
+    # 2. 生成日期范围内的报告:
+    #    python backfill/backfill_reports.py --start 2023-09-01 --end 2023-09-15
+    #
+    # 3. 生成日期范围内的报告并推送到GitHub:
+    #    python backfill/backfill_reports.py --start 2023-09-01 --end 2023-09-15 --push
+    #
+    # 4. 强制重新生成特定日期的报告:
+    #    python backfill/backfill_reports.py --single-date 2023-09-15 --force
 
 if __name__ == "__main__":
     main() 

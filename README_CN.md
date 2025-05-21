@@ -148,6 +148,51 @@ git push -u origin main
 - **MongoDB连接失败**：确保MongoDB服务正在运行，并且连接URI正确
 - **符号链接不工作**：在Windows系统上，可能需要管理员权限来创建符号链接
 
+## 补充生成工具
+
+本项目包含用于补充生成特定日期范围或单一日期缺失报告的工具。这些工具对于填补报告历史中的空缺特别有用。
+
+### 检查缺失报告
+
+检查特定日期范围内缺失的报告：
+
+```bash
+python backfill/check_missing_reports.py --start 2023-01-01 --end 2023-01-31
+```
+
+参数说明：
+- `--start`: 开始日期 (YYYY-MM-DD)
+- `--end`: 结束日期 (YYYY-MM-DD)
+- `--interval`: 报告间隔小时数（默认：24）
+- `--output`: 输出文件路径，用于写入结果
+
+### 补充生成缺失报告
+
+为特定日期范围补充生成缺失的报告：
+
+```bash
+python backfill/backfill_reports.py --start 2023-01-01 --end 2023-01-31
+```
+
+参数说明：
+- `--start`: 开始日期 (YYYY-MM-DD)
+- `--end`: 结束日期 (YYYY-MM-DD)
+- `--interval`: 报告间隔小时数（默认：24）
+- `--push`: 推送报告到GitHub
+- `--force`: 强制重新生成已存在的报告
+
+### 为单一日期生成报告
+
+为特定日期生成报告：
+
+```bash
+python backfill/backfill_reports.py --single-date 2023-01-15
+```
+
+此命令将为2023年1月15日生成报告，即使该日期的报告已经存在。
+
+有关补充生成工具的更多信息，请参阅[补充生成工具README](backfill/README.md)。 
+
 ## 许可证
 
 MIT 
