@@ -1,44 +1,44 @@
-# Reddit AI 趋势报告 - 2025-05-17
+# Reddit AI 趋势报告 - 2025-05-21
 
 ## 今日热门帖子
 
 | Title | Community | Score | Comments | Category | Posted |
 |-------|-----------|-------|----------|----------|--------|
-| [Is this real?](https://www.reddit.com/comments/1knzefo) | [r/singularity](https://www.reddit.com/r/singularity) | 3841 | 1023 | Robotics | 2025-05-16 12:18 UTC |
-| [\"AI will make Everyone more efficient!\"](https://www.reddit.com/comments/1ko2wqu) | [r/singularity](https://www.reddit.com/r/singularity) | 3166 | 107 | AI | 2025-05-16 14:55 UTC |
-| [Claude 3.7’s full 24,000-token system prompt just leaked....](https://www.reddit.com/comments/1kobg3f) | [r/AI_Agents](https://www.reddit.com/r/AI_Agents) | 1801 | 245 | Discussion | 2025-05-16 20:48 UTC |
-| [continuing the trend of badly naming things](https://www.reddit.com/comments/1ko5yti) | [r/singularity](https://www.reddit.com/r/singularity) | 736 | 44 | Shitposting | 2025-05-16 17:00 UTC |
-| [Did Standford HuggingFace account got Hacked?](https://www.reddit.com/comments/1ko27bi) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 573 | 58 | Question | Help | 2025-05-16 14:26 UTC |
-| [Ollama violating llama.cpp license for over a year](https://www.reddit.com/comments/1ko1iob) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 563 | 158 | Discussion | 2025-05-16 13:57 UTC |
-| [Stanford has dropped AGI](https://www.reddit.com/comments/1ko0khr) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 411 | 178 | Resources | 2025-05-16 13:15 UTC |
-| [I built a tiny Linux OS to make your LLMs actually useful...](https://www.reddit.com/comments/1ko1v1k) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 325 | 58 | News | 2025-05-16 14:12 UTC |
-| [When did small models get so smart? I get really good out...](https://www.reddit.com/comments/1ko6hy7) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 325 | 41 | Discussion | 2025-05-16 17:21 UTC |
-| [Are we finally hitting THE wall right now?](https://www.reddit.com/comments/1knqap9) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 294 | 261 | Discussion | 2025-05-16 02:41 UTC |
+| [Holy sht](https://www.reddit.com/comments/1krazz3) | [r/singularity](https://www.reddit.com/r/singularity) | 1457 | 234 | LLM News | 2025-05-20 17:36 UTC |
+| [Google Astra: A sign that AI will change the world](https://www.reddit.com/comments/1krgy3d) | [r/singularity](https://www.reddit.com/r/singularity) | 949 | 196 | AI | 2025-05-20 21:36 UTC |
+| [New flash.&nbsp;Google won.&nbsp;Don\'t know how to feel ...](https://www.reddit.com/comments/1krao8g) | [r/singularity](https://www.reddit.com/r/singularity) | 891 | 225 | LLM News | 2025-05-20 17:24 UTC |
+| [DeepMind Veo 3 Sailor generated video](https://www.reddit.com/comments/1kre3qp) | [r/singularity](https://www.reddit.com/r/singularity) | 808 | 182 | Video | 2025-05-20 19:40 UTC |
+| [Veo 3 Standup comedy](https://www.reddit.com/comments/1krgm19) | [r/singularity](https://www.reddit.com/r/singularity) | 637 | 141 | AI | 2025-05-20 21:22 UTC |
+| [Microsoft Discovery : AI Agents Go From Idea to Synthesiz...](https://www.reddit.com/comments/1kr6e4j) | [r/singularity](https://www.reddit.com/r/singularity) | 588 | 86 | AI | 2025-05-20 14:34 UTC |
+| [The Future is here](https://www.reddit.com/comments/1krabuy) | [r/singularity](https://www.reddit.com/r/singularity) | 570 | 39 | Meme | 2025-05-20 17:10 UTC |
+| [Sliding Window Attention support merged into llama.cpp, d...](https://www.reddit.com/comments/1kqye2t) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 490 | 76 | News | 2025-05-20 06:48 UTC |
+| [ok google, next time mention llama.cpp too!](https://www.reddit.com/comments/1kri7ik) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 455 | 68 | Discussion | 2025-05-20 22:31 UTC |
+| [Veo 3](https://www.reddit.com/comments/1krce1m) | [r/singularity](https://www.reddit.com/r/singularity) | 436 | 111 | AI | 2025-05-20 18:31 UTC |
 
 
 ## 本周热门帖子
 
 | # | Title | Community | Score | Comments | Category | Posted |
 |---|-------|-----------|-------|----------|----------|--------|
-| 1 | [StackOverflow activity down to 2008 numbers](https://www.reddit.com/comments/1knapc3) | [r/singularity](https://www.reddit.com/r/singularity) | 5060 | 612 | Engineering | 2025-05-15 15:13 UTC |
-| 2 | [Is this real?](https://www.reddit.com/comments/1knzefo) | [r/singularity](https://www.reddit.com/r/singularity) | 3843 | 1023 | Robotics | 2025-05-16 12:18 UTC |
-| 3 | [Stack overflow is almost dead](https://www.reddit.com/comments/1kon38k) | [r/LocalLLM](https://www.reddit.com/r/LocalLLM) | 3258 | 297 | Discussion | 2025-05-17 07:14 UTC |
-| 4 | [\"AI will make Everyone more efficient!\"](https://www.reddit.com/comments/1ko2wqu) | [r/singularity](https://www.reddit.com/r/singularity) | 3172 | 107 | AI | 2025-05-16 14:55 UTC |
-| 5 | [AI is coming in fast](https://www.reddit.com/comments/1kqg9ig) | [r/singularity](https://www.reddit.com/r/singularity) | 2920 | 707 | AI | 2025-05-19 16:35 UTC |
-| 6 | [I don\'t think people realize just how insane the Matrix ...](https://www.reddit.com/comments/1knem3r) | [r/singularity](https://www.reddit.com/r/singularity) | 2540 | 368 | AI | 2025-05-15 17:50 UTC |
-| 7 | [Important to remember](https://www.reddit.com/comments/1kn69m3) | [r/singularity](https://www.reddit.com/r/singularity) | 2347 | 505 | AI | 2025-05-15 11:54 UTC |
+| 1 | [StackOverflow activity down to 2008 numbers](https://www.reddit.com/comments/1knapc3) | [r/singularity](https://www.reddit.com/r/singularity) | 5058 | 612 | Engineering | 2025-05-15 15:13 UTC |
+| 2 | [Is this real?](https://www.reddit.com/comments/1knzefo) | [r/singularity](https://www.reddit.com/r/singularity) | 3842 | 1023 | Robotics | 2025-05-16 12:18 UTC |
+| 3 | [Stack overflow is almost dead](https://www.reddit.com/comments/1kon38k) | [r/LocalLLM](https://www.reddit.com/r/LocalLLM) | 3256 | 297 | Discussion | 2025-05-17 07:14 UTC |
+| 4 | [\"AI will make Everyone more efficient!\"](https://www.reddit.com/comments/1ko2wqu) | [r/singularity](https://www.reddit.com/r/singularity) | 3174 | 107 | AI | 2025-05-16 14:55 UTC |
+| 5 | [AI is coming in fast](https://www.reddit.com/comments/1kqg9ig) | [r/singularity](https://www.reddit.com/r/singularity) | 2917 | 707 | AI | 2025-05-19 16:35 UTC |
+| 6 | [I don\'t think people realize just how insane the Matrix ...](https://www.reddit.com/comments/1knem3r) | [r/singularity](https://www.reddit.com/r/singularity) | 2544 | 368 | AI | 2025-05-15 17:50 UTC |
+| 7 | [Important to remember](https://www.reddit.com/comments/1kn69m3) | [r/singularity](https://www.reddit.com/r/singularity) | 2343 | 505 | AI | 2025-05-15 11:54 UTC |
 | 8 | [DeepMind introduces AlphaEvolve: a Gemini-powered coding ...](https://www.reddit.com/comments/1kmhti8) | [r/singularity](https://www.reddit.com/r/singularity) | 2096 | 493 | AI | 2025-05-14 15:18 UTC |
-| 9 | [Claude 3.7’s full 24,000-token system prompt just leaked....](https://www.reddit.com/comments/1kobg3f) | [r/AI_Agents](https://www.reddit.com/r/AI_Agents) | 1804 | 245 | Discussion | 2025-05-16 20:48 UTC |
-| 10 | [China rolls out world’s largest fleet of driverless minin...](https://www.reddit.com/comments/1kpwk66) | [r/singularity](https://www.reddit.com/r/singularity) | 1727 | 241 | AI | 2025-05-18 22:40 UTC |
-| 11 | [Grok for some reason](https://www.reddit.com/comments/1knbcmv) | [r/singularity](https://www.reddit.com/r/singularity) | 1544 | 111 | Shitposting | 2025-05-15 15:39 UTC |
-| 12 | [Holy sht](https://www.reddit.com/comments/1krazz3) | [r/singularity](https://www.reddit.com/r/singularity) | 1457 | 234 | LLM News | 2025-05-20 17:36 UTC |
-| 13 | [I’m actually starting to buy the “everyone’s head is in t...](https://www.reddit.com/comments/1kqprj0) | [r/singularity](https://www.reddit.com/r/singularity) | 1155 | 457 | Discussion | 2025-05-19 22:54 UTC |
-| 14 | [Let\'s see how it goes](https://www.reddit.com/comments/1konnx9) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1103 | 91 | Other | 2025-05-17 07:54 UTC |
-| 15 | [Meet AlphaEvolve, the Google AI that writes its own code—...](https://www.reddit.com/comments/1kmia4y) | [r/singularity](https://www.reddit.com/r/singularity) | 1042 | 125 | AI | 2025-05-14 15:37 UTC |
-| 16 | [Grok off the rails](https://www.reddit.com/comments/1kmorra) | [r/singularity](https://www.reddit.com/r/singularity) | 1017 | 307 | AI | 2025-05-14 19:54 UTC |
-| 17 | [Google Astra: A sign that AI will change the world](https://www.reddit.com/comments/1krgy3d) | [r/singularity](https://www.reddit.com/r/singularity) | 941 | 195 | AI | 2025-05-20 21:36 UTC |
-| 18 | [New flash.&nbsp;Google won.&nbsp;Don\'t know how to feel ...](https://www.reddit.com/comments/1krao8g) | [r/singularity](https://www.reddit.com/r/singularity) | 883 | 225 | LLM News | 2025-05-20 17:24 UTC |
-| 19 | [Google I/O next week - what to expect?](https://www.reddit.com/comments/1kp1l56) | [r/singularity](https://www.reddit.com/r/singularity) | 861 | 160 | AI | 2025-05-17 19:47 UTC |
+| 9 | [Claude 3.7’s full 24,000-token system prompt just leaked....](https://www.reddit.com/comments/1kobg3f) | [r/AI_Agents](https://www.reddit.com/r/AI_Agents) | 1799 | 245 | Discussion | 2025-05-16 20:48 UTC |
+| 10 | [China rolls out world’s largest fleet of driverless minin...](https://www.reddit.com/comments/1kpwk66) | [r/singularity](https://www.reddit.com/r/singularity) | 1720 | 241 | AI | 2025-05-18 22:40 UTC |
+| 11 | [Grok for some reason](https://www.reddit.com/comments/1knbcmv) | [r/singularity](https://www.reddit.com/r/singularity) | 1535 | 111 | Shitposting | 2025-05-15 15:39 UTC |
+| 12 | [Holy sht](https://www.reddit.com/comments/1krazz3) | [r/singularity](https://www.reddit.com/r/singularity) | 1458 | 234 | LLM News | 2025-05-20 17:36 UTC |
+| 13 | [I’m actually starting to buy the “everyone’s head is in t...](https://www.reddit.com/comments/1kqprj0) | [r/singularity](https://www.reddit.com/r/singularity) | 1151 | 457 | Discussion | 2025-05-19 22:54 UTC |
+| 14 | [Let\'s see how it goes](https://www.reddit.com/comments/1konnx9) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 1105 | 91 | Other | 2025-05-17 07:54 UTC |
+| 15 | [Meet AlphaEvolve, the Google AI that writes its own code—...](https://www.reddit.com/comments/1kmia4y) | [r/singularity](https://www.reddit.com/r/singularity) | 1041 | 125 | AI | 2025-05-14 15:37 UTC |
+| 16 | [Grok off the rails](https://www.reddit.com/comments/1kmorra) | [r/singularity](https://www.reddit.com/r/singularity) | 1010 | 307 | AI | 2025-05-14 19:54 UTC |
+| 17 | [Google Astra: A sign that AI will change the world](https://www.reddit.com/comments/1krgy3d) | [r/singularity](https://www.reddit.com/r/singularity) | 953 | 196 | AI | 2025-05-20 21:36 UTC |
+| 18 | [New flash.&nbsp;Google won.&nbsp;Don\'t know how to feel ...](https://www.reddit.com/comments/1krao8g) | [r/singularity](https://www.reddit.com/r/singularity) | 893 | 225 | LLM News | 2025-05-20 17:24 UTC |
+| 19 | [Google I/O next week - what to expect?](https://www.reddit.com/comments/1kp1l56) | [r/singularity](https://www.reddit.com/r/singularity) | 863 | 160 | AI | 2025-05-17 19:47 UTC |
 | 20 | [Vibe coding from a computer scientist\'s lens:](https://www.reddit.com/comments/1kpu26d) | [r/LLMDevs](https://www.reddit.com/r/LLMDevs) | 856 | 134 | Discussion | 2025-05-18 20:48 UTC |
 
 
@@ -46,25 +46,25 @@
 
 | # | Title | Community | Score | Comments | Category | Posted |
 |---|-------|-----------|-------|----------|----------|--------|
-| 1 | [Deepfakes are getting crazy realistic](https://www.reddit.com/comments/1kdwtbr) | [r/singularity](https://www.reddit.com/r/singularity) | 6215 | 312 | AI | 2025-05-03 16:23 UTC |
-| 2 | [Woopsie daisie](https://www.reddit.com/comments/1kcmm0i) | [r/singularity](https://www.reddit.com/r/singularity) | 6184 | 325 | Shitposting | 2025-05-01 23:18 UTC |
-| 3 | [StackOverflow activity down to 2008 numbers](https://www.reddit.com/comments/1knapc3) | [r/singularity](https://www.reddit.com/r/singularity) | 5060 | 612 | Engineering | 2025-05-15 15:13 UTC |
-| 4 | [Shots fired!](https://www.reddit.com/comments/1k9ytwh) | [r/singularity](https://www.reddit.com/r/singularity) | 4025 | 189 | Meme | 2025-04-28 15:48 UTC |
-| 5 | [Is this real?](https://www.reddit.com/comments/1knzefo) | [r/singularity](https://www.reddit.com/r/singularity) | 3845 | 1023 | Robotics | 2025-05-16 12:18 UTC |
-| 6 | [OpenAI employee confirms the public has access to models ...](https://www.reddit.com/comments/1k6rdcp) | [r/singularity](https://www.reddit.com/r/singularity) | 3413 | 464 | AI | 2025-04-24 12:49 UTC |
-| 7 | [Stack overflow is almost dead](https://www.reddit.com/comments/1kon38k) | [r/LocalLLM](https://www.reddit.com/r/LocalLLM) | 3258 | 297 | Discussion | 2025-05-17 07:14 UTC |
-| 8 | [\"AI will make Everyone more efficient!\"](https://www.reddit.com/comments/1ko2wqu) | [r/singularity](https://www.reddit.com/r/singularity) | 3169 | 107 | AI | 2025-05-16 14:55 UTC |
-| 9 | [AI is coming in fast](https://www.reddit.com/comments/1kqg9ig) | [r/singularity](https://www.reddit.com/r/singularity) | 2922 | 707 | AI | 2025-05-19 16:35 UTC |
-| 10 | [Young people.&nbsp;Don\'t live like you\'ve got forever](https://www.reddit.com/comments/1k99f0f) | [r/singularity](https://www.reddit.com/r/singularity) | 2850 | 513 | Biotech/Longevity | 2025-04-27 17:28 UTC |
-| 11 | [goodbye, GPT-4.&nbsp;you kicked off a revolution.](https://www.reddit.com/comments/1kby4sw) | [r/singularity](https://www.reddit.com/r/singularity) | 2778 | 291 | AI | 2025-05-01 02:27 UTC |
-| 12 | [I don\'t think people realize just how insane the Matrix ...](https://www.reddit.com/comments/1knem3r) | [r/singularity](https://www.reddit.com/r/singularity) | 2539 | 368 | AI | 2025-05-15 17:50 UTC |
-| 13 | [Real-time webcam demo with SmolVLM using llama.cpp](https://www.reddit.com/comments/1klx9q2) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 2528 | 138 | Generation | 2025-05-13 20:59 UTC |
-| 14 | [when there is way too much Reddit in the training data](https://www.reddit.com/comments/1k8qeyh) | [r/singularity](https://www.reddit.com/r/singularity) | 2343 | 204 | Meme | 2025-04-26 23:40 UTC |
-| 15 | [Important to remember](https://www.reddit.com/comments/1kn69m3) | [r/singularity](https://www.reddit.com/r/singularity) | 2341 | 505 | AI | 2025-05-15 11:54 UTC |
-| 16 | [DeepMind introduces AlphaEvolve: a Gemini-powered coding ...](https://www.reddit.com/comments/1kmhti8) | [r/singularity](https://www.reddit.com/r/singularity) | 2098 | 493 | AI | 2025-05-14 15:18 UTC |
-| 17 | [AI Just Took Over Reddit’s Front Page](https://www.reddit.com/comments/1kdb56u) | [r/singularity](https://www.reddit.com/r/singularity) | 2083 | 435 | AI | 2025-05-02 20:35 UTC |
-| 18 | [Tesla Optimus New Movements](https://www.reddit.com/comments/1km2mk1) | [r/singularity](https://www.reddit.com/r/singularity) | 2022 | 792 | Robotics | 2025-05-14 01:01 UTC |
-| 19 | [Over...&nbsp;and over...&nbsp;and over...](https://www.reddit.com/comments/1kkxj53) | [r/singularity](https://www.reddit.com/r/singularity) | 1996 | 288 | AI | 2025-05-12 16:52 UTC |
+| 1 | [Deepfakes are getting crazy realistic](https://www.reddit.com/comments/1kdwtbr) | [r/singularity](https://www.reddit.com/r/singularity) | 6206 | 312 | AI | 2025-05-03 16:23 UTC |
+| 2 | [Woopsie daisie](https://www.reddit.com/comments/1kcmm0i) | [r/singularity](https://www.reddit.com/r/singularity) | 6182 | 325 | Shitposting | 2025-05-01 23:18 UTC |
+| 3 | [StackOverflow activity down to 2008 numbers](https://www.reddit.com/comments/1knapc3) | [r/singularity](https://www.reddit.com/r/singularity) | 5065 | 612 | Engineering | 2025-05-15 15:13 UTC |
+| 4 | [Shots fired!](https://www.reddit.com/comments/1k9ytwh) | [r/singularity](https://www.reddit.com/r/singularity) | 4024 | 189 | Meme | 2025-04-28 15:48 UTC |
+| 5 | [Is this real?](https://www.reddit.com/comments/1knzefo) | [r/singularity](https://www.reddit.com/r/singularity) | 3846 | 1023 | Robotics | 2025-05-16 12:18 UTC |
+| 6 | [OpenAI employee confirms the public has access to models ...](https://www.reddit.com/comments/1k6rdcp) | [r/singularity](https://www.reddit.com/r/singularity) | 3405 | 464 | AI | 2025-04-24 12:49 UTC |
+| 7 | [Stack overflow is almost dead](https://www.reddit.com/comments/1kon38k) | [r/LocalLLM](https://www.reddit.com/r/LocalLLM) | 3264 | 297 | Discussion | 2025-05-17 07:14 UTC |
+| 8 | [\"AI will make Everyone more efficient!\"](https://www.reddit.com/comments/1ko2wqu) | [r/singularity](https://www.reddit.com/r/singularity) | 3175 | 107 | AI | 2025-05-16 14:55 UTC |
+| 9 | [AI is coming in fast](https://www.reddit.com/comments/1kqg9ig) | [r/singularity](https://www.reddit.com/r/singularity) | 2916 | 707 | AI | 2025-05-19 16:35 UTC |
+| 10 | [Young people.&nbsp;Don\'t live like you\'ve got forever](https://www.reddit.com/comments/1k99f0f) | [r/singularity](https://www.reddit.com/r/singularity) | 2847 | 513 | Biotech/Longevity | 2025-04-27 17:28 UTC |
+| 11 | [goodbye, GPT-4.&nbsp;you kicked off a revolution.](https://www.reddit.com/comments/1kby4sw) | [r/singularity](https://www.reddit.com/r/singularity) | 2776 | 291 | AI | 2025-05-01 02:27 UTC |
+| 12 | [I don\'t think people realize just how insane the Matrix ...](https://www.reddit.com/comments/1knem3r) | [r/singularity](https://www.reddit.com/r/singularity) | 2541 | 368 | AI | 2025-05-15 17:50 UTC |
+| 13 | [Real-time webcam demo with SmolVLM using llama.cpp](https://www.reddit.com/comments/1klx9q2) | [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA) | 2533 | 138 | Generation | 2025-05-13 20:59 UTC |
+| 14 | [Important to remember](https://www.reddit.com/comments/1kn69m3) | [r/singularity](https://www.reddit.com/r/singularity) | 2341 | 505 | AI | 2025-05-15 11:54 UTC |
+| 15 | [when there is way too much Reddit in the training data](https://www.reddit.com/comments/1k8qeyh) | [r/singularity](https://www.reddit.com/r/singularity) | 2340 | 204 | Meme | 2025-04-26 23:40 UTC |
+| 16 | [DeepMind introduces AlphaEvolve: a Gemini-powered coding ...](https://www.reddit.com/comments/1kmhti8) | [r/singularity](https://www.reddit.com/r/singularity) | 2095 | 493 | AI | 2025-05-14 15:18 UTC |
+| 17 | [AI Just Took Over Reddit’s Front Page](https://www.reddit.com/comments/1kdb56u) | [r/singularity](https://www.reddit.com/r/singularity) | 2078 | 435 | AI | 2025-05-02 20:35 UTC |
+| 18 | [Tesla Optimus New Movements](https://www.reddit.com/comments/1km2mk1) | [r/singularity](https://www.reddit.com/r/singularity) | 2024 | 792 | Robotics | 2025-05-14 01:01 UTC |
+| 19 | [Over...&nbsp;and over...&nbsp;and over...](https://www.reddit.com/comments/1kkxj53) | [r/singularity](https://www.reddit.com/r/singularity) | 1995 | 288 | AI | 2025-05-12 16:52 UTC |
 | 20 | [Software engineering hires by AI companies](https://www.reddit.com/comments/1kilx19) | [r/singularity](https://www.reddit.com/r/singularity) | 1989 | 252 | AI | 2025-05-09 15:54 UTC |
 
 
@@ -74,68 +74,66 @@
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Claude 3.7’s full 24,000-token system prompt just leaked....](https://www.reddit.com/comments/1kobg3f) | 1801 | 245 | Discussion | 2025-05-16 20:48 UTC |
-| [Give me a Make or N8N workflow I will show you how to do ...](https://www.reddit.com/comments/1knp05b) | 14 | 13 | Discussion | 2025-05-16 01:32 UTC |
-| [Building More Independent AI Agents: Let Them Plan for Th...](https://www.reddit.com/comments/1ko4558) | 12 | 25 | Discussion | 2025-05-16 15:45 UTC |
+| [More than 1,500 AI projects are now vulnerable to a silen...](https://www.reddit.com/comments/1krei5p) | 93 | 28 | Discussion | 2025-05-20 19:56 UTC |
+| [I created an AI Company 6 months ago meanwhile I worked a...](https://www.reddit.com/comments/1kqz8pc) | 68 | 48 | Discussion | 2025-05-20 07:48 UTC |
+| [My Clients Want AI Automation, But All I See Is Process &...](https://www.reddit.com/comments/1kreiax) | 33 | 26 | Discussion | 2025-05-20 19:56 UTC |
 
 
-### r/LangChain
+### r/LLMDevs
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Vector knowledge system + MCP](https://www.reddit.com/comments/1ko5wry) | 49 | 22 | Question | Help | 2025-05-16 16:58 UTC |
-| [I Didn\'t Expect GPU Access to Be This Simple and Honestl...](https://www.reddit.com/comments/1knyr69) | 42 | 11 | Resources | 2025-05-16 11:44 UTC |
+| [I trapped an LLM into an art installation and made it que...](https://www.reddit.com/comments/1kqz9pl) | 45 | 13 | News | 2025-05-20 07:50 UTC |
 
 
 ### r/LocalLLM
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Any LLM for web scraping?](https://www.reddit.com/comments/1knsuse) | 22 | 16 | Model | 2025-05-16 05:05 UTC |
+| [I trapped LLama3.2B onto an art installation and made it ...](https://www.reddit.com/comments/1kqz90h) | 351 | 29 | Project | 2025-05-20 07:49 UTC |
 
 
 ### r/LocalLLaMA
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Did Standford HuggingFace account got Hacked?](https://www.reddit.com/comments/1ko27bi) | 573 | 58 | Question | Help | 2025-05-16 14:26 UTC |
-| [Ollama violating llama.cpp license for over a year](https://www.reddit.com/comments/1ko1iob) | 563 | 158 | Discussion | 2025-05-16 13:57 UTC |
-| [Stanford has dropped AGI](https://www.reddit.com/comments/1ko0khr) | 411 | 178 | Resources | 2025-05-16 13:15 UTC |
+| [Sliding Window Attention support merged into llama.cpp, d...](https://www.reddit.com/comments/1kqye2t) | 490 | 76 | News | 2025-05-20 06:48 UTC |
+| [ok google, next time mention llama.cpp too!](https://www.reddit.com/comments/1kri7ik) | 455 | 68 | Discussion | 2025-05-20 22:31 UTC |
+| [Gemma 3n Preview](https://www.reddit.com/comments/1kr8s40) | 388 | 99 | New Model | 2025-05-20 16:10 UTC |
 
 
 ### r/MachineLearning
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [\[D\] Who do you all follow for genuinely substantial ML/...](https://www.reddit.com/comments/1ko64s6) | 148 | 37 | Discussion | 2025-05-16 17:07 UTC |
-| [\[P\] Why I Used CNN+LSTM Over CNN for CCTV Anomaly Detec...](https://www.reddit.com/comments/1ko5voc) | 31 | 28 | Project | 2025-05-16 16:57 UTC |
+| [\[P\] OpenEvolve: Open Source Implementation of DeepMind\...](https://www.reddit.com/comments/1kr9w8l) | 113 | 19 | Project | 2025-05-20 16:54 UTC |
+| [\[D\] Realism for AI Top 20 PhD Programs](https://www.reddit.com/comments/1kr506u) | 27 | 46 | Discussion | 2025-05-20 13:34 UTC |
+| [\[D\] How do students have so many top tier conference pa...](https://www.reddit.com/comments/1krkhfl) | 23 | 14 | Discussion | 2025-05-21 00:18 UTC |
 
 
 ### r/Rag
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Author of Enterprise RAG here—happy to dive deep on hybri...](https://www.reddit.com/comments/1knr136) | 82 | 113 | General | 2025-05-16 03:20 UTC |
-| [How to build a Full RAG Pipeline(Beginner) using Pinecone](https://www.reddit.com/comments/1knw1im) | 36 | 18 | General | 2025-05-16 08:47 UTC |
-| [How do you bulk analyze users\' queries?](https://www.reddit.com/comments/1knvmig) | 12 | 11 | Q&A | 2025-05-16 08:16 UTC |
+| [Having trouble getting my RAG chatbot to distinguish betw...](https://www.reddit.com/comments/1kraqst) | 1 | 14 | General | 2025-05-20 17:26 UTC |
 
 
 ### r/datascience
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Jupyter notebook has grown into a 200+ line pipeline for ...](https://www.reddit.com/comments/1ko8j3v) | 133 | 77 | Projects | 2025-05-16 18:44 UTC |
-| [When is the right time to move from Jupyter into a full m...](https://www.reddit.com/comments/1ko8ngz) | 75 | 43 | Discussion | 2025-05-16 18:49 UTC |
-| [Demand forecasting using multiple variables](https://www.reddit.com/comments/1kobhx7) | 15 | 37 | Discussion | 2025-05-16 20:50 UTC |
+| [No DS job after degree](https://www.reddit.com/comments/1krc89b) | 145 | 64 | Career | US | 2025-05-20 18:24 UTC |
+| [Does “We are still interviewing other candidates” ever fo...](https://www.reddit.com/comments/1krigvq) | 24 | 18 | Career | US | 2025-05-20 22:43 UTC |
+| [Are there any math tests that test mathematical skill for...](https://www.reddit.com/comments/1krau6q) | 16 | 20 | Education | 2025-05-20 17:30 UTC |
 
 
 ### r/singularity
 
 | Title | Score | Comments | Category | Posted |
 |-------|-------|----------|----------|--------|
-| [Is this real?](https://www.reddit.com/comments/1knzefo) | 3841 | 1023 | Robotics | 2025-05-16 12:18 UTC |
-| [\"AI will make Everyone more efficient!\"](https://www.reddit.com/comments/1ko2wqu) | 3166 | 107 | AI | 2025-05-16 14:55 UTC |
-| [continuing the trend of badly naming things](https://www.reddit.com/comments/1ko5yti) | 736 | 44 | Shitposting | 2025-05-16 17:00 UTC |
+| [Holy sht](https://www.reddit.com/comments/1krazz3) | 1457 | 234 | LLM News | 2025-05-20 17:36 UTC |
+| [Google Astra: A sign that AI will change the world](https://www.reddit.com/comments/1krgy3d) | 949 | 196 | AI | 2025-05-20 21:36 UTC |
+| [New flash.&nbsp;Google won.&nbsp;Don\'t know how to feel ...](https://www.reddit.com/comments/1krao8g) | 891 | 225 | LLM News | 2025-05-20 17:24 UTC |
 
 
 
@@ -144,104 +142,119 @@
 
 
 
-### **2025-05-17 AI相关Subreddit趋势报告**
+### **2025-05-21 Reddit AI趋势报告**
 
 ---
 
-#### **1. 今日焦点：过去24小时的最新趋势和突破性发展**
+### **1. 今日焦点：过去24小时的最新趋势和突破性发展**
 
-过去24小时，AI相关Subreddit的讨论焦点集中在以下几个关键领域：
+过去24小时，AI相关subreddit的讨论集中在以下几个关键领域，显示出一些新兴趋势和突破性发展：
 
-1. **Claude 3.7的系统提示泄露**  
-   - **帖子**：[Claude 3.7’s full 24,000-token system prompt just leaked....](https://www.reddit.com/comments/1kobg3f)  
-   - **社区**：r/AI_Agents  
-   - **分析**：Claude 3.7的系统提示泄露引发了广泛讨论。这一泄露不仅揭示了模型的内部工作机制，还可能对模型的安全性和滥用风险带来深远影响。社区成员对此表示担忧，认为这可能导致模型被恶意利用，同时也对开发者如何应对此类事件的透明度提出了更高要求。
+#### **1.1 Google Astra和LLM的突破**
+- **帖子**：*[Google Astra: A sign that AI will change the world](https://www.reddit.com/comments/1krgy3d)*（得分949，评论196）
+- **帖子**：*[Holy sht](https://www.reddit.com/comments/1krazz3)*（得分1457，评论234）
+- **分析**：Google Astra的发布成为今日焦点，社区对其潜在影响的讨论非常热烈。Astra被视为LLM（大型语言模型）技术的一次重大突破，尤其是在其应用场景的广泛性和实用性方面。与此同时，另一个帖子 *[Holy sht](https://www.reddit.com/comments/1krazz3)* 也引发了广泛关注，可能与Astra或其他LLM相关的重大进展有关。这些讨论表明，社区对Google在AI领域的进展充满期待，尤其是在LLM的商业化和实际应用方面。
 
-2. **Ollama违反llama.cpp协议**  
-   - **帖子**：[Ollama violating llama.cpp license for over a year](https://www.reddit.com/comments/1ko1iob)  
-   - **社区**：r/LocalLLaMA  
-   - **分析**：Ollama被指控长期违反llama.cpp的开源协议，这一讨论反映了社区对开源协议遵守和AI开发者责任的关注。随着开源模型的普及，如何确保合规性和公平使用成为一个重要议题。
+#### **1.2 DeepMind Veo 3的多模态能力**
+- **帖子**：*[DeepMind Veo 3 Sailor generated video](https://www.reddit.com/comments/1kre3qp)*（得分808，评论182）
+- **分析**：DeepMind Veo 3的多模态生成能力（尤其是视频生成）成为今日的热门话题。社区对其生成视频的质量和潜在应用（如娱乐、教育等）非常感兴趣。这表明多模态AI的发展正在加速，尤其是在视觉和语言的结合方面。
 
-3. **斯坦福放弃AGI研究**  
-   - **帖子**：[Stanford has dropped AGI](https://www.reddit.com/comments/1ko0khr)  
-   - **社区**：r/LocalLLaMA  
-   - **分析**：斯坦福大学放弃AGI（通用人工智能）研究的消息引发了社区对学术机构在AGI领域角色和未来方向的讨论。这一消息可能反映了当前AGI研究的挑战和不确定性。
+#### **1.3 StackOverflow活动下降与AI工具的兴起**
+- **帖子**：*[StackOverflow activity down to 2008 numbers](https://www.reddit.com/comments/1knapc3)*（得分5058，评论612）
+- **分析**：虽然这是一个周趋势，但其讨论延续到了今日，显示出AI工具（如GitHub Copilot、AlphaEvolve等）在软件开发中的广泛应用可能正在改变开发者的工作方式。StackOverflow活动的下降可能反映了开发者越来越依赖AI工具来解决问题，而非传统的问答平台。
 
-这些趋势显示，社区对AI模型的透明度、合规性以及学术机构的研究方向越来越感兴趣，同时也反映了开发者对AI技术的实际应用和伦理问题的深刻思考。
+#### **1.4 Microsoft Discovery与AI Agent的快速迭代**
+- **帖子**：*[Microsoft Discovery : AI Agents Go From Idea to Synthesiz...](https://www.reddit.com/comments/1kr6e4j)*（得分588，评论86）
+- **分析**：Microsoft Discovery在AI Agent领域的进展显示，AI Agent的开发和应用正在快速迭代。社区对其从想法到实际合成的能力非常关注，这可能预示着AI Agent在未来的更多实际应用场景。
 
----
-
-#### **2. 周趋势对比：今日趋势与过去一周的对比**
-
-与过去一周相比，今日的趋势在以下方面有所不同：
-
-1. **新兴话题：模型泄露与合规性**  
-   - 过去一周，r/singularity社区的热门讨论集中在AI效率、机器人技术和StackOverflow活动下降等宏观话题上，而今日的讨论则更关注模型开发的具体问题，如Claude 3.7的系统提示泄露和Ollama的协议违反问题。
-
-2. **持续趋势：AI效率与技术进步**  
-   - 过去一周的热门帖子中，[“AI will make Everyone more efficient!”](https://www.reddit.com/comments/1ko2wqu) 和 [“AI is coming in fast”](https://www.reddit.com/comments/1kqg9ig) 等帖子显示社区对AI效率提升的持续关注。这种关注在今日趋势中延续，尤其是在讨论AI对开发者工具和生产力的影响时。
-
-3. **新出现的关注点：开源协议与学术研究方向**  
-   - 过去一周的讨论中，开源协议和学术机构的研究方向并未成为主要话题，而今日的趋势则显示这些问题逐渐受到关注，尤其是在r/LocalLLaMA社区中。
-
-这些变化反映了AI社区从宏观技术进展向具体开发实践和伦理问题的转变。
+#### **1.5 llama.cpp的技术进展**
+- **帖子**：*[Sliding Window Attention support merged into llama.cpp, d...](https://www.reddit.com/comments/1kqye2t)*（得分490，评论76）
+- **分析**：llama.cpp社区对滑动窗口注意力（Sliding Window Attention）的支持合并显示，开源LLM模型的技术实现正在不断优化。这对于开发者和研究人员来说是一个重要的进展，尤其是在模型效率和性能方面。
 
 ---
 
-#### **3. 月度技术演进：当前趋势在更长时间跨度中的意义**
+### **2. 周趋势对比：今日趋势与过去一周的对比**
 
-从过去一个月的数据来看，AI社区的讨论逐渐从AI的广泛应用和深刻影响（如深度伪造、StackOverflow活动下降）转向更具体的技术和开发问题。例如：
+#### **2.1 持续趋势**
+- **StackOverflow活动下降**：这一趋势在过去一周持续存在，显示出AI工具对软件开发的深远影响。
+- **AI效率与生产力**：关于AI如何提高效率的讨论（如帖子*["AI will make Everyone more efficient!"](https://www.reddit.com/comments/1ko2wqu)*)在过去一周中多次出现，表明社区对AI在提升生产力方面的兴趣持续增长。
+- **DeepMind与Google的竞争**：DeepMind AlphaEvolve和Google Astra的讨论在过去一周中多次出现，显示出两大公司在AI领域的竞争正在加剧。
 
-1. **模型透明度与安全性**  
-   - 月初的热门帖子如[“Deepfakes are getting crazy realistic”](https://www.reddit.com/comments/1kdwtbr) 展示了AI在生成技术上的进步，而今日的趋势则更关注模型的透明度和安全性（如Claude 3.7的系统提示泄露）。
+#### **2.2 新出现的趋势**
+- **Google Astra的发布**：这是一个新兴趋势，过去一周中并未出现相关讨论，但在过去24小时内迅速成为焦点。
+- **DeepMind Veo 3的多模态生成**：虽然DeepMind的多模态模型在过去一周中有所讨论，但今日的帖子显示出社区对其视频生成能力的新兴趣。
+- **llama.cpp的技术进展**：这是一个新兴趋势，过去一周中并未出现滑动窗口注意力支持的讨论。
 
-2. **开源与合规性**  
-   - 月初的讨论中，[“Real-time webcam demo with SmolVLM using llama.cpp”](https://www.reddit.com/comments/1klx9q2) 展示了开源模型的创新应用，而今日的趋势则揭示了开源开发中的潜在问题（如Ollama违反协议）。
-
-3. **学术研究方向**  
-   - 月初的热门帖子如[“goodbye, GPT-4. you kicked off a revolution.”](https://www.reddit.com/comments/1kby4sw) 展示了对大模型的反思，而今日的趋势则反映了学术机构在AGI研究上的调整（如斯坦福放弃AGI）。
-
-这些变化表明，AI社区正在从对技术进步的初始兴奋逐渐转向对技术开发和应用的深刻反思。
-
----
-
-#### **4. 技术深度解析：Claude 3.7系统提示泄露的技术意义**
-
-**什么是Claude 3.7的系统提示？**  
-Claude 3.7是Anthropic开发的一种高级LLM，其系统提示是用于定义模型行为和限制的内部指令。这些提示通常包括安全过滤器、内容限制以及模型的行为规范。
-
-**为什么重要？**  
-1. **安全性**：系统提示是模型安全的核心。如果这些提示被泄露，恶意actors可能会利用这些信息绕过限制，生成有害内容。  
-2. **透明度**：泄露事件引发了对模型开发者透明度的讨论。社区希望开发者能够更公开地分享模型的设计和限制，以避免类似问题的发生。  
-3. **合规性**：泄露还可能导致模型被滥用，例如生成虚假信息或进行网络攻击。
-
-**与更广泛AI生态系统的关系**  
-这一事件反映了AI开发中的一个关键挑战：如何在模型的强大功能与安全性之间找到平衡。随着模型的复杂性增加，开发者需要更加注重模型的安全设计和透明沟通，以避免类似的泄露事件。
+#### **2.3 趋势变化的反思**
+- **从讨论到应用**：过去一周的讨论更多集中在AI的潜力和理论层面，而今日的趋势显示出AI技术的实际应用正在加速，尤其是在LLM和多模态生成方面。
+- **开源与商业化并行**：社区对开源模型（如llama.cpp）和商业化模型（如Google Astra）的讨论并行，显示出AI生态系统的多样性和复杂性。
 
 ---
 
-#### **5. 社区亮点：不同Subreddit的热门话题**
+### **3. 月度技术演进：AI领域的长期发展趋势**
 
-1. **r/singularity**  
-   - 关注宏观AI趋势，如AI效率提升、机器人技术和StackOverflow活动下降。  
-   - 代表帖子：[“Is this real?”](https://www.reddit.com/comments/1knzefo) 和 [“AI will make Everyone more efficient!”](https://www.reddit.com/comments/1ko2wqu)  
+#### **3.1 LLM的商业化与多模态扩展**
+- **Google Astra和DeepMind Veo 3**：这些模型的发布和讨论显示，LLM正在向更广泛的应用场景扩展，尤其是在多模态领域（如文本、图像、视频的生成与交互）。
+- **技术演进**：过去一个月中，LLM的讨论从理论潜力转向实际应用，尤其是在商业化和多模态生成方面。
 
-2. **r/LocalLLaMA**  
-   - 讨论集中在开源模型的开发和合规性问题上，如Ollama违反协议和Claude 3.7的系统提示泄露。  
-   - 代表帖子：[“Ollama violating llama.cpp license for over a year”](https://www.reddit.com/comments/1ko1iob) 和 [“Did Standford HuggingFace account got Hacked?”](https://www.reddit.com/comments/1ko27bi)  
+#### **3.2 开源模型的技术突破**
+- **llama.cpp的进展**：滑动窗口注意力的支持显示，开源模型在技术实现上的不断优化，尤其是在模型效率和性能方面。
+- **技术演进**：过去一个月中，开源模型的讨论从模型的发布转向其实际应用和技术优化，显示出开源社区在AI生态系统中的重要作用。
 
-3. **r/AI_Agents**  
-   - 关注AI代理的开发和应用，如Claude 3.7的系统提示泄露。  
-   - 代表帖子：[“Claude 3.7’s full 24,000-token system prompt just leaked....”](https://www.reddit.com/comments/1kobg3f)  
-
-4. **r/MachineLearning**  
-   - 讨论机器学习的实际应用和技术挑战，如CCTV异常检测和ML研究的影响力。  
-   - 代表帖子：[“\[P\] Why I Used CNN+LSTM Over CNN for CCTV Anomaly Detection”](https://www.reddit.com/comments/1ko5voc)  
-
-这些社区的讨论反映了AI领域的多样化发展方向，从宏观趋势到具体技术挑战。
+#### **3.3 AI工具对传统行业的冲击**
+- **StackOverflow活动下降**：AI工具（如GitHub Copilot、AlphaEvolve）对软件开发的影响正在加深，显示出AI正在改变传统行业的工作方式。
+- **技术演进**：过去一个月中，AI工具的讨论从初步兴趣转向实际影响，尤其是在软件开发和效率提升方面。
 
 ---
 
-#### **总结**
+### **4. 技术深度解析：Google Astra的技术与意义**
 
-今日的AI相关Subreddit趋势显示，社区对AI模型的透明度、合规性和安全性越来越关注，同时也在探讨AI对开发者效率和生产力的深远影响。这些趋势不仅反映了技术的进步，也揭示了开发者和研究者在实践中的实际挑战。
+#### **4.1 什么是Google Astra？**
+Google Astra是一款由Google DeepMind开发的新一代大型语言模型（LLM），其名称来源于希腊语中的“星星”，象征着其在AI领域的潜在突破性作用。Astra的发布被视为Google在LLM领域的一次重大进展，尤其是在模型的应用场景和商业化方面。
+
+#### **4.2 技术亮点**
+- **多模态能力**：Astra不仅支持文本生成，还具备图像和视频理解与生成能力，显示出Google在多模态AI领域的技术积累。
+- **商业化应用**：Astra被设计为一个高度商业化的模型，能够在多个行业中应用，包括医疗、教育、金融等。
+- **效率与性能**：Astra的训练效率和推理性能显示出Google在AI硬件和算法优化方面的进展。
+
+#### **4.3 为什么重要？**
+- **商业化潜力**：Astra的商业化应用场景显示出LLM正在从实验室走向实际业务，尤其是在需要高效文本和多模态交互的行业。
+- **技术竞争**：Astra的发布加剧了Google与其他AI公司（如OpenAI、DeepMind）的竞争，推动了整个行业的技术进步。
+- **AI生态系统**：Astra的成功可能会吸引更多开发者和企业进入LLM领域，进一步扩展AI的应用生态系统。
+
+#### **4.4 与更广泛的AI生态系统的关系**
+Astra的发布不仅是Google的一次技术突破，也是整个AI行业的一次重要进展。它显示出LLM正在从单一功能（如文本生成）向多模态、多场景应用的方向发展。这一趋势可能会影响未来的AI模型设计和应用方向。
+
+---
+
+### **5. 社区亮点：不同subreddit的热门话题**
+
+#### **5.1 r/singularity**
+- **焦点**：LLM的商业化、多模态生成、AI对传统行业的冲击。
+- **代表帖子**：*[Holy sht](https://www.reddit.com/comments/1krazz3)*、*[Google Astra: A sign that AI will change the world](https://www.reddit.com/comments/1krgy3d)*。
+- **分析**：r/singularity社区的讨论集中在AI的广泛影响和未来趋势，尤其是LLM的商业化和多模态能力。
+
+#### **5.2 r/LocalLLaMA**
+- **焦点**：开源模型的技术实现和优化。
+- **代表帖子**：*[Sliding Window Attention support merged into llama.cpp, d...](https://www.reddit.com/comments/1kqye2t)*。
+- **分析**：r/LocalLLaMA社区的讨论集中在开源模型的技术细节和实际应用，尤其是llama.cpp的技术进展。
+
+#### **5.3 r/AI_Agents**
+- **焦点**：AI Agent的开发和应用。
+- **代表帖子**：*[Microsoft Discovery : AI Agents Go From Idea to Synthesiz...](https://www.reddit.com/comments/1kr6e4j)*。
+- **分析**：r/AI_Agents社区的讨论集中在AI Agent的开发和应用，尤其是其从想法到实际合成的能力。
+
+#### **5.4 r/MachineLearning**
+- **焦点**：AI的技术实现和学术研究。
+- **代表帖子**：*[\[P\] OpenEvolve: Open Source Implementation of DeepMind\...](https://www.reddit.com/comments/1kr9w8l)*。
+- **分析**：r/MachineLearning社区的讨论集中在AI的技术实现和学术研究，尤其是DeepMind的AlphaEvolve模型。
+
+#### **5.5 r/datascience**
+- **焦点**：AI对数据科学和软件开发的影响。
+- **代表帖子**：*[StackOverflow activity down to 2008 numbers](https://www.reddit.com/comments/1knapc3)*。
+- **分析**：r/datascience社区的讨论集中在AI对数据科学和软件开发的影响，尤其是StackOverflow活动的下降。
+
+---
+
+### **总结**
+今日的焦点集中在Google Astra、DeepMind Veo 3和llama.cpp的技术进展上，显示出AI领域在商业化、多模态生成和开源技术方面的快速发展。这些趋势不仅反映了AI社区对实际应用的关注，也显示出AI生态系统的多样性和复杂性。未来，随着LLM和多模态模型的进一步发展，AI的应用场景将更加广泛，技术进步也将加速。
