@@ -161,11 +161,11 @@ def backfill_report(target_date_str, hours=24, push_to_github=False):
         
         # 保存报告到文件
         report_paths = {}
-        timestamp = target_date.strftime("%Y%m%d_%H%M%S")
+        date_str = target_date.strftime("%Y%m%d")
         
         for lang, report in reports.items():
-            # 创建文件名
-            filename = f"report_{timestamp}_{lang}.md"
+            # 创建文件名，去掉时间戳部分
+            filename = f"report_{date_str}_{lang}.md"
             filepath = os.path.join(report_dir, filename)
             
             # 保存报告到文件
