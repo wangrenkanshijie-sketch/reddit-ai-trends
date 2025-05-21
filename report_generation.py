@@ -37,17 +37,19 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-def create_report_directory_structure(base_dir: str = "reports") -> str:
+def create_report_directory_structure(base_dir: str = "reports", reference_date: Optional[datetime] = None) -> str:
     """
     Create a directory structure for reports based on year/month/day.
     
     Args:
         base_dir: Base directory for reports
+        reference_date: Optional reference date to use (defaults to current date)
         
     Returns:
         Path to the created directory
     """
-    now = datetime.now()
+    # 使用参考日期或当前时间
+    now = reference_date if reference_date is not None else datetime.now()
     year_dir = str(now.year)
     month_dir = f"{now.month:02d}"
     day_dir = f"{now.day:02d}"
@@ -268,7 +270,7 @@ def generate_report(languages: List[str] = None, skip_mongodb: bool = False,
         )
         
         # Create directory structure - 使用参考日期
-        report_dir = create_report_directory_structure()
+        report_dir = create_report_directory_structure(reference_date=current_time)
         
         # Save reports to files
         report_paths = {}
