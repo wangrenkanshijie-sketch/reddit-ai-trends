@@ -41,7 +41,7 @@ jobs:
           git commit -m "Daily report update" || echo "No changes to commit"
           git push
 
-      # ===================== 推送到 Notion（对齐 Title / Date / Content） =====================
+      # ===================== 推送到 Notion（原生块渲染） =====================
       - name: Push reports to Notion (ZH & EN)
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
@@ -49,12 +49,13 @@ jobs:
         run: |
           python - <<'PY'
           import os, json, datetime, pathlib, re, requests
+          from html import unescape
 
           TOKEN = os.environ["NOTION_API_KEY"]
           DB_ID = os.environ["NOTION_DATABASE_ID"]
-          TITLE_PROP = "Title"   # 你的标题列
-          DATE_PROP  = "Date"    # 你的日期列
-          CONTENT_PROP = "Content"  # 你的内容列（富文本）
+          TITLE_PROP = "Title"     # 你的数据库列名（严格大小写）
+          DATE_PROP  = "Date"
+          CONTENT_PROP = "Content"
 
           HEADERS = {
               "Authorization": f"Bearer {TOKEN}",
@@ -62,48 +63,151 @@ jobs:
               "Content-Type": "application/json",
           }
 
-          def md_to_blocks(markdown: str):
-              """#/##/### -> heading_1/2/3，其余内容打包为 code(markdown) 并分片，避免超长"""
-              blocks, buf = [], []
-              def flush():
-                  if not buf: return
-                  t = "\n".join(buf)
-                  for i in range(0, len(t), 1800):
-                      blocks.append({
-                          "type":"code",
-                          "code":{
-                              "language":"markdown",
-                              "rich_text":[{"type":"text","text":{"content": t[i:i+1800]}}]
-                          }
-                      })
-                  buf.clear()
+          def chunk_text(text, size=1800):
+              for i in range(0, len(text), size):
+                  yield text[i:i+size]
 
-              for ln in markdown.splitlines():
-                  m = re.match(r"^(#{1,3})\s+(.*)$", ln)
-                  if m:
-                      flush()
-                      level = min(len(m.group(1)),3)
-                      title = m.group(2).strip()
+          def rich(text):
+              return [{"type":"text","text":{"content": text}}]
+
+          def link_rich(title, url):
+              return [{"type":"text","text":{"content": title,"link":{"url":url}}}]
+
+          # --- 把 markdown 表格解析成 bulleted list（标题+元信息） ---
+          def parse_table(lines, start):
+              if start+1>=len(lines): return None, start
+              header = lines[start]
+              sep    = lines[start+1]
+              if "|" not in header or not re.search(r"^\s*\|?\s*-", sep):
+                  return None, start
+              items = []
+              i = start+2
+              while i < len(lines) and "|" in lines[i]:
+                  row = [c.strip() for c in lines[i].strip().strip("|").split("|")]
+                  items.append(row)
+                  i += 1
+              return items, i-1
+
+          def cell_link_or_text(cell):
+              m = re.search(r"\[([^\]]+)\]\(([^)]+)\)", cell)
+              if m:
+                  return ("link", m.group(1).strip(), m.group(2).strip())
+              return ("text", re.sub(r"\s+", " ", cell).strip())
+
+          def md_to_blocks(md: str):
+              lines = md.splitlines()
+              blocks = []
+              buf_para = []
+
+              def flush_para():
+                  if not buf_para: return
+                  text = "\n".join(buf_para).strip()
+                  if text:
+                      for seg in chunk_text(text):
+                          blocks.append({"type":"paragraph","paragraph":{"rich_text":rich(seg)}})
+                  buf_para.clear()
+
+              i = 0
+              in_code = False
+              code_lang = ""
+              code_buf = []
+
+              while i < len(lines):
+                  ln = lines[i]
+
+                  # fenced code
+                  mcode = re.match(r"^```(\w+)?\s*$", ln)
+                  if mcode:
+                      if not in_code:
+                          flush_para()
+                          in_code = True
+                          code_lang = (mcode.group(1) or "").lower()
+                          code_buf = []
+                      else:
+                          code_text = "\n".join(code_buf)
+                          blocks.append({"type":"code","code":{
+                              "language": code_lang or "plain text",
+                              "rich_text": [{"type":"text","text":{"content": code_text}}]
+                          }})
+                          in_code = False
+                          code_lang = ""
+                          code_buf = []
+                      i += 1
+                      continue
+                  if in_code:
+                      code_buf.append(ln)
+                      i += 1
+                      continue
+
+                  # headings
+                  mh = re.match(r"^(#{1,3})\s+(.*)$", ln)
+                  if mh:
+                      flush_para()
+                      level = min(len(mh.group(1)),3)
+                      title = mh.group(2).strip()
                       blocks.append({
                           "type": f"heading_{level}",
-                          f"heading_{level}": {"rich_text":[{"type":"text","text":{"content": title}}]}
+                          f"heading_{level}": {"rich_text": rich(title)}
                       })
-                  elif ln.strip()=="":
-                      flush()
+                      i += 1
+                      continue
+
+                  # hr
+                  if re.match(r"^\s*---+\s*$", ln):
+                      flush_para()
+                      blocks.append({"type":"divider","divider":{}})
+                      i += 1
+                      continue
+
+                  # tables -> list
+                  table_items, end_idx = parse_table(lines, i)
+                  if table_items:
+                      flush_para()
+                      header = table_items[0] if table_items else []
+                      for row in table_items[1:]:
+                          cells = row + [""]*(max(0, len(header)-len(row)))
+                          first = cells[0] if cells else ""
+                          kind, a, b = cell_link_or_text(first)
+                          if kind == "link":
+                              rt = link_rich(a, b)
+                          else:
+                              rt = rich(a)
+
+                          metas = []
+                          if len(cells) > 1: metas.append(cells[1])                   # Community
+                          if len(cells) > 2: metas.append(f"Score {cells[2]}")       # Score
+                          if len(cells) > 3: metas.append(f"Comments {cells[3]}")    # Comments
+                          if len(cells) > 4: metas.append(cells[4])                  # Category
+                          if len(cells) > 5: metas.append(cells[5])                  # Posted
+                          meta = " · ".join([m for m in metas if m])
+                          if meta:
+                              rt = rt + [{"type":"text","text":{"content": f" — {meta}"}}]
+
+                          blocks.append({
+                              "type":"bulleted_list_item",
+                              "bulleted_list_item":{"rich_text": rt}
+                          })
+                      i = end_idx + 1
+                      continue
+
+                  # blank line => end paragraph
+                  if ln.strip()=="":
+                      flush_para()
                   else:
-                      buf.append(ln)
-              flush()
+                      buf_para.append(ln)
+                  i += 1
+
+              flush_para()
               return blocks
 
           def create_page(title: str, md: str):
-              blocks = md_to_blocks(md)
+              blocks = md_to_blocks(unescape(md))
               today = datetime.date.today().isoformat()
-              # Content 属性放一个简短摘要/提示，正文放在 children blocks
               summary = (md.replace("\n"," ")[:1800] or "见页面正文")
               props = {
-                  TITLE_PROP: {"title":[{"type":"text","text":{"content": title}}]},
-                  DATE_PROP:  {"date":{"start": today}},
-                  CONTENT_PROP: {"rich_text":[{"type":"text","text":{"content": summary}}]}
+                  TITLE_PROP:   {"title":     [{"type":"text","text":{"content": title}}]},
+                  DATE_PROP:    {"date":      {"start": today}},
+                  CONTENT_PROP: {"rich_text": [{"type":"text","text":{"content": summary}}]},
               }
               payload = {"parent":{"database_id": DB_ID}, "properties": props, "children": blocks[:200]}
               r = requests.post("https://api.notion.com/v1/pages", headers=HEADERS, data=json.dumps(payload))
