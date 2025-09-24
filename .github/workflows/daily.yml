@@ -1,4 +1,4 @@
-  name: Daily Reddit AI Trends
+name: Daily Reddit AI Trends
 
 on:
   schedule:
