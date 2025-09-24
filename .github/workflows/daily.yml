@@ -1,246 +1,102 @@
-name: Daily Reddit AI Trends
-
-on:
-  schedule:
-    - cron: "5 6 * * *"   # 每天 06:05 UTC 运行
-  workflow_dispatch:       # 允许手动触发
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: write      # 允许回推 reports 目录
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install deps
-        run: pip install -r requirements.txt
-
-      - name: Generate reports (EN+ZH)
-        env:
-          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          REPORT_LANGUAGES: ${{ secrets.REPORT_LANGUAGES }}
-        run: |
-          python report_generation.py --languages en zh
-
-      - name: Commit & push reports
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports/
-          git commit -m "Daily report update" || echo "No changes to commit"
-          git push
-
-      - name: Push reports to Notion (ZH & EN)
+  - name: Push reports to Notion (ZH & EN)
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: |
           python - <<'PY'
-          import os, json, re, datetime, pathlib, requests, textwrap
+          import os, requests, re, json, datetime, pathlib
 
           TOKEN = os.environ["NOTION_API_KEY"]
           DB_ID = os.environ["NOTION_DATABASE_ID"]
+          TITLE_PROP = "Title"    # 你的数据库标题属性名
+          DATE_PROP  = "Date"     # 日期属性名（可选，没有就删掉 DATE_PROP 相关行）
 
           HEADERS = {
-              "Authorization": f"Bearer {TOKEN}",
-              "Notion-Version": "2022-06-28",
-              "Content-Type": "application/json",
+            "Authorization": f"Bearer {TOKEN}",
+            "Notion-Version": "2022-06-28",
+            "Content-Type": "application/json",
           }
 
-          # --------------- Markdown -> Notion blocks (健壮版) ---------------
+          # —— 简单 Markdown -> Notion blocks（段落/标题）——
+          def md_to_blocks(markdown: str):
+            # 去掉 Markdown 表格竖线，避免太长的 rich_text
+            markdown = re.sub(r"\|", " ", markdown)
 
-          def chunk_text(s: str, n: int = 1800):
-              # Notion 单个 rich_text 建议 < 2000 字符，这里稳妥按 1800 切块
-              for i in range(0, len(s), n):
-                  yield s[i:i+n]
+            blocks = []
+            for raw in markdown.splitlines():
+              line = raw.rstrip()
+              if not line:
+                blocks.append({"object":"block","type":"paragraph","paragraph":{"rich_text":[{"type":"text","text":{"content":""}}]}})
+                continue
 
-          def paragraph_block(text: str):
-              return {
-                  "object": "block",
-                  "type": "paragraph",
-                  "paragraph": {
-                      "rich_text": [{"type": "text", "text": {"content": text_part}} for text_part in chunk_text(text)]
+              # 识别 #/##/### 标题
+              m = re.match(r'^(#{1,3})\s+(.*)$', line)
+              if m:
+                hashes, text = m.groups()
+                level = len(hashes)
+                blocks.append({
+                  "object":"block",
+                  "type":"heading_{}".format(level),
+                  "heading_{}".format(level): {
+                    "rich_text":[{"type":"text","text":{"content": text[:1800]}}]
                   }
+                })
+              else:
+                # 普通段落
+                blocks.append({
+                  "object":"block",
+                  "type":"paragraph",
+                  "paragraph":{"rich_text":[{"type":"text","text":{"content": line[:1800]}}]}
+                })
+
+            return blocks
+
+          def create_page(title: str, date_val: datetime.date):
+            payload = {
+              "parent": {"database_id": DB_ID},
+              "properties": {
+                TITLE_PROP: {"title":[{"type":"text","text":{"content": title}}]}
               }
+            }
+            # 如果你的库里存在 Date 属性
+            if DATE_PROP:
+              payload["properties"][DATE_PROP] = {"date":{"start": date_val.isoformat()}}
 
-          def code_block(code: str, lang: str = "plain text"):
-              return {
-                  "object": "block",
-                  "type": "code",
-                  "code": {
-                      "rich_text": [{"type": "text", "text": {"content": code}}],
-                      "language": lang
-                  }
-              }
+            r = requests.post("https://api.notion.com/v1/pages", headers=HEADERS, json=payload)
+            if r.status_code >= 300:
+              raise RuntimeError(f"create page failed: {r.status_code} {r.text}")
+            return r.json()["id"]
 
-          def heading_block(level: int, text: str):
-              key = f"heading_{level}"
-              return {
-                  "object": "block",
-                  "type": key,
-                  key: {"rich_text": [{"type": "text", "text": {"content": text}}]}
-              }
-
-          def bulleted_block(text: str):
-              return {
-                  "object": "block",
-                  "type": "bulleted_list_item",
-                  "bulleted_list_item": {
-                      "rich_text": [{"type": "text", "text": {"content": text}}]
-                  }
-              }
-
-          def divider_block():
-              return {"object": "block", "type": "divider", "divider": {}}
-
-          def is_table_sep(line: str):
-              # |-----|------|-----| 之类
-              l = line.strip()
-              if not l.startswith("|"):
-                  return False
-              cells = [c.strip() for c in l.split("|") if c.strip()]
-              if not cells:
-                  return False
-              return all(set(c) <= set("-:") for c in cells)
-
-          def normalize_md(md: str):
-              # 去除 Windows 换行、去 BOM
-              md = md.replace("\r\n", "\n").replace("\r", "\n")
-              return md.strip("\ufeff")
-
-          def md_to_blocks(md_text: str):
-              """
-              轻量解析：
-              - # / ## / ### → heading_1/2/3
-              - --- / ***   → divider
-              - ``` 代码块 ``` → code
-              - 以竖线 | 开头的行：
-                    - 分隔行（---:）忽略
-                    - 其它合并为 “列1 | 列2 | 列3…” 的 bullet
-              - 其它行 → 段落
-              """
-              md_text = normalize_md(md_text)
-              blocks = []
-
-              in_code = False
-              code_lang = "plain text"
-              code_lines = []
-
-              for raw in md_text.split("\n"):
-                  line = raw.rstrip()
-
-                  # 代码块开始/结束
-                  if line.startswith("```"):
-                      fence = line.strip()
-                      if not in_code:
-                          in_code = True
-                          code_lang = fence[3:].strip() or "plain text"
-                          code_lines = []
-                      else:
-                          in_code = False
-                          code = "\n".join(code_lines).rstrip("\n")
-                          blocks.append(code_block(code, code_lang))
-                      continue
-
-                  if in_code:
-                      code_lines.append(line)
-                      continue
-
-                  # 标题
-                  if line.startswith("### "):
-                      blocks.append(heading_block(3, line[4:].strip()))
-                      continue
-                  if line.startswith("## "):
-                      blocks.append(heading_block(2, line[3:].strip()))
-                      continue
-                  if line.startswith("# "):
-                      blocks.append(heading_block(1, line[2:].strip()))
-                      continue
-
-                  # 分割线
-                  if re.fullmatch(r"\s*(-{3,}|_{3,}|\*{3,})\s*", line):
-                      blocks.append(divider_block())
-                      continue
-
-                  # 表格/竖线行
-                  if line.strip().startswith("|"):
-                      if is_table_sep(line):
-                          # 表头分隔行跳过
-                          continue
-                      # 把每个 cell 合并成一行 bullet，避免“列数不统一”导致 split 报错
-                      cols = [c.strip() for c in line.split("|") if c.strip()]
-                      if cols:
-                          text = " | ".join(cols)
-                          blocks.append(bulleted_block(text))
-                      continue
-
-                  # 空行 → 用一个空段落分隔（可选）
-                  if not line.strip():
-                      continue
-
-                  # 普通段落
-                  blocks.append(paragraph_block(line))
-
-              return blocks
-
-          # --------------- 创建 Notion 页面 ---------------
-
-          SESSION = requests.Session()
-
-          def create_page(title: str, date_obj: datetime.date, blocks: list):
-              url = "https://api.notion.com/v1/pages"
-              props = {
-                  "Name": {  # Notion 数据库里的标题属性名（如果你用的是 Title，请把 Name 改成 Title）
-                      "title": [{"type": "text", "text": {"content": title}}]
-                  },
-                  "Date": {
-                      "date": {"start": date_obj.isoformat()}
-                  }
-              }
-              payload = {
-                  "parent": {"database_id": DB_ID},
-                  "properties": props,
-                  "children": blocks[:]
-              }
-              r = SESSION.post(url, headers=HEADERS, data=json.dumps(payload))
+          def append_children(page_id: str, children: list, batch_size: int = 90):
+            # Notion 限制每次最多 100，取 90 更保险
+            for i in range(0, len(children), batch_size):
+              chunk = children[i:i+batch_size]
+              url = f"https://api.notion.com/v1/blocks/{page_id}/children"
+              r = requests.patch(url, headers=HEADERS, json={"children": chunk})
               if r.status_code >= 300:
-                  raise RuntimeError(f"Create page failed: {r.status_code} {r.text}")
+                raise RuntimeError(f"append children failed: {r.status_code} {r.text}")
 
-          # --------------- 读取两份日报 & 推送 ---------------
-
+          # 读取当天生成的 MD（如果没有就取 latest）
           today = datetime.date.today()
+          md_zh = pathlib.Path("reports/latest_report_zh.md")
+          md_en = pathlib.Path("reports/latest_report_en.md")
 
-          tasks = [
-              ("reports/latest_report_zh.md", f"AI 趋势日报（ZH）{today.isoformat()}"),
-              ("reports/latest_report_en.md", f"AI Trends Daily (EN) {today.isoformat()}"),
-          ]
+          def push_one(md_path: pathlib.Path, lang_tag: str):
+            if not md_path.exists():
+              raise FileNotFoundError(f"{md_path} not found")
+            md = md_path.read_text(encoding="utf-8")
+            blocks = md_to_blocks(md)
 
-          any_pushed = False
+            title = f"AI Trends Daily ({lang_tag}) {today.isoformat()}"
+            page_id = create_page(title, today)
 
-          for path, title in tasks:
-              p = pathlib.Path(path)
-              if not p.exists():
-                  continue
-              md = p.read_text(encoding="utf-8").strip()
-              # 可选：把 markdown 中的表格竖线转成更易读的 bullet
-              # 这里直接交给 md_to_blocks 解析
-              blocks = md_to_blocks(md)
-              create_page(title, today, blocks)
-              any_pushed = True
-              print(f"Pushed to Notion: {title} ({len(blocks)} blocks)")
+            # 分批追加，避免超 100 限制
+            if blocks:
+              append_children(page_id, blocks)
 
-          if not any_pushed:
-              print("WARN: no report files found to push.")
+            print(f"Notion sync done: {title}")
+
+          # ZH & EN 都推
+          push_one(md_zh, "ZH")
+          push_one(md_en, "EN")
           PY
