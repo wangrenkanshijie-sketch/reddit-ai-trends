@@ -24,7 +24,6 @@ jobs:
       - name: Install deps
         run: pip install -r requirements.txt
 
-      # 生成中/英报告（保持你仓库里的脚本调用方式）
       - name: Generate reports (EN+ZH)
         env:
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
@@ -34,16 +33,14 @@ jobs:
           REPORT_LANGUAGES: ${{ secrets.REPORT_LANGUAGES }}
         run: python report_generation.py --languages en zh
 
-      # 提交最新报告到仓库
       - name: Commit & push reports
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reports/
           git commit -m "Daily report update" || echo "No changes to commit"
           git push
 
-      # 把 Markdown 推送到 Notion 数据库（自动创建两条记录：ZH/EN）
       - name: Push reports to Notion (ZH & EN)
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
@@ -55,106 +52,105 @@ jobs:
           TOKEN = os.environ["NOTION_API_KEY"]
           DB_ID = os.environ["NOTION_DATABASE_ID"]
 
-          # === Notion API 基本头 ===
+          # 你的数据库属性名：Title（title）和 Date（date）
+          TITLE_PROP = "Title"
+          DATE_PROP = "Date"
+
           HEADERS = {
               "Authorization": f"Bearer {TOKEN}",
               "Notion-Version": "2022-06-28",
               "Content-Type": "application/json",
           }
 
-          # === 将 Markdown 转成 Notion blocks（简洁稳妥：标题/段落）===
-          # 1) 行首 #### / ### / ## / # 识别为 heading
-          # 2) 其它行作为 paragraph；表格行(|)先转为普通文本
-          # 3) 每段做 1800 字分块，避免 rich_text 过长
+          # —— 简单 Markdown -> Notion blocks（段落/标题） ——
           def md_to_blocks(markdown: str):
-              def para_block(text: str):
-                  return {
-                      "object": "block",
-                      "type": "paragraph",
-                      "paragraph": { "rich_text": [ { "type": "text", "text": { "content": text } } ] }
-                  }
-
-              def heading_block(level: int, text: str):
-                  key = {1:"heading_1", 2:"heading_2", 3:"heading_3"}.get(level, "heading_3")
-                  return {
-                      "object": "block",
-                      "type": key,
-                      key: { "rich_text": [ { "type": "text", "text": { "content": text } } ] }
-                  }
-
-              # 去掉 Markdown 表格竖线，避免生成巨长的富文本段落
+              # 去掉 Markdown 表格竖线，避免太长的 rich_text
               markdown = re.sub(r"\|", " ", markdown)
 
               blocks = []
-              for raw in markdown.splitlines():
-                  line = raw.rstrip()
+              for ln in markdown.splitlines():
+                  if not ln.strip():
+                      # 空行插入段落空行
+                      blocks.append({
+                          "object": "block",
+                          "type": "paragraph",
+                          "paragraph": {"rich_text": []}
+                      })
+                      continue
 
-                  # 标题
-                  m = re.match(r'^(#{1,6})\s+(.*)$', line)
+                  # 识别标题（#/##/###）
+                  m = re.match(r'^(#{1,3})\s+(.*)$', ln)
                   if m:
-                      hashes, text = m.group(1), m.group(2).strip()
-                      level = min(len(hashes), 3)  # 限为 1~3
-                      if text:
-                          blocks.append(heading_block(level, text))
-                      continue
-
-                  # 空行 → 转成空段落（让版面更舒展）
-                  if not line:
-                      blocks.append(para_block(""))
-                      continue
-
-                  # 普通段落，1800 字分块
-                  CHUNK = 1800
-                  for i in range(0, len(line), CHUNK):
-                      blocks.append(para_block(line[i:i+CHUNK]))
-
+                      level = len(m.group(1))
+                      text = m.group(2)[:1800]
+                      blocks.append({
+                          "object": "block",
+                          "type": "heading_" + str(level),
+                          "heading_" + str(level): {
+                              "rich_text": [{"type": "text", "text": {"content": text}}]
+                          }
+                      })
+                  else:
+                      text = ln[:1800]
+                      blocks.append({
+                          "object": "block",
+                          "type": "paragraph",
+                          "paragraph": {
+                              "rich_text": [{"type": "text", "text": {"content": text}}]
+                          }
+                      })
               return blocks
 
-          # === 创建 Notion 页面 ===
           def create_page(title: str, date_val: datetime.date):
-              props = {
-                  "Name": { "title": [ { "type": "text", "text": { "content": title } } ] },
-                  "Date": { "date": { "start": date_val.isoformat() } }
-              }
               payload = {
-                  "parent": { "database_id": DB_ID },
-                  "properties": props
+                  "parent": {"database_id": DB_ID},
+                  "properties": {
+                      TITLE_PROP: {"title": [{"type": "text", "text": {"content": title}}]},
+                      DATE_PROP: {"date": {"start": date_val.isoformat()}}
+                  }
               }
-              r = requests.post("https://api.notion.com/v1/pages", headers=HEADERS, json=payload)
+              r = requests.post("https://api.notion.com/v1/pages",
+                                headers=HEADERS, json=payload)
               if r.status_code >= 300:
                   raise RuntimeError(f"Create page failed: {r.status_code} {r.text}")
               return r.json()["id"]
 
-          # === 追加 children，分批 <= 90，规避 Notion 100 blocks 限制 ===
           def append_children(page_id: str, children: list, batch_size: int = 90):
+              # Notion 限制一次 children 追加最多 100，这里保守取 90
               for i in range(0, len(children), batch_size):
                   chunk = children[i:i+batch_size]
                   url = f"https://api.notion.com/v1/blocks/{page_id}/children"
                   r = requests.patch(url, headers=HEADERS, json={"children": chunk})
                   if r.status_code >= 300:
-                      raise RuntimeError(f"Append failed: {r.status_code} {r.text}")
+                      raise RuntimeError(f"Append children failed: {r.status_code} {r.text}")
 
-          # === 读取并推送单份报告 ===
-          def push_one(lang_tag: str, md_path: str):
-              p = pathlib.Path(md_path)
-              if not p.exists():
-                  print(f"[WARN] {md_path} not found, skip {lang_tag}")
-                  return
+          # —— 读取最新生成的 MD（中文/英文），推送到 Notion ——
+          today = datetime.date.today()
 
-              text = p.read_text(encoding="utf-8")
-              blocks = md_to_blocks(text)
+          def push_one(md_path: pathlib.Path, lang_tag: str):
+              if not md_path.exists():
+                  raise FileNotFoundError(f"{md_path} not found")
 
-              today = datetime.date.today()
-              if lang_tag.upper() == "ZH":
-                  title = f"AI 趋势日报（ZH）{today.isoformat()}"
-              else:
-                  title = f"AI Trends Daily (EN) {today.isoformat()}"
+              md_text = md_path.read_text(encoding="utf-8")
+              blocks = md_to_blocks(md_text)
 
+              title = f"AI Trends Daily ({lang_tag}) {today.isoformat()}"
               page_id = create_page(title, today)
-              append_children(page_id, blocks, batch_size=90)
-              print(f"[OK] Notion synced: {title}")
+              append_children(page_id, blocks)
 
-          # === 执行：先中文，再英文 ===
-          push_one("ZH", "reports/latest_report_zh.md")
-          push_one("EN", "reports/latest_report_en.md")
+              print(f"Notion sync done: {title}")
+
+          p_zh = pathlib.Path("reports/latest_report_zh.md")
+          p_en = pathlib.Path("reports/latest_report_en.md")
+
+          # 有哪个就发哪个，两个都发则会在 Notion 里生成两行
+          if p_zh.exists():
+              push_one(p_zh, "ZH")
+          else:
+              print("WARN: latest_report_zh.md not found, skip ZH")
+
+          if p_en.exists():
+              push_one(p_en, "EN")
+          else:
+              print("WARN: latest_report_en.md not found, skip EN")
           PY
