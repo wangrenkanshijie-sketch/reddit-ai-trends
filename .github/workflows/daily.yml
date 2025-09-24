@@ -3,14 +3,14 @@ name: Daily Reddit AI Trends
 on:
   schedule:
     - cron: "5 6 * * *"   # 每天 06:05 UTC 运行
-  workflow_dispatch:       # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write    # 允许回推 reports
+      contents: write    # 允许回推 reports 目录
 
     steps:
       - name: Checkout repo
@@ -40,3 +40,96 @@ jobs:
           git add reports/
           git commit -m "Daily report update" || echo "No changes to commit"
           git push
+
+      # ===================== 推送到 Notion（对齐 Title / Date / Content） =====================
+      - name: Push reports to Notion (ZH & EN)
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: |
+          python - <<'PY'
+          import os, json, datetime, pathlib, re, requests
+
+          TOKEN = os.environ["NOTION_API_KEY"]
+          DB_ID = os.environ["NOTION_DATABASE_ID"]
+          TITLE_PROP = "Title"   # 你的标题列
+          DATE_PROP  = "Date"    # 你的日期列
+          CONTENT_PROP = "Content"  # 你的内容列（富文本）
+
+          HEADERS = {
+              "Authorization": f"Bearer {TOKEN}",
+              "Notion-Version": "2022-06-28",
+              "Content-Type": "application/json",
+          }
+
+          def md_to_blocks(markdown: str):
+              """#/##/### -> heading_1/2/3，其余内容打包为 code(markdown) 并分片，避免超长"""
+              blocks, buf = [], []
+              def flush():
+                  if not buf: return
+                  t = "\n".join(buf)
+                  for i in range(0, len(t), 1800):
+                      blocks.append({
+                          "type":"code",
+                          "code":{
+                              "language":"markdown",
+                              "rich_text":[{"type":"text","text":{"content": t[i:i+1800]}}]
+                          }
+                      })
+                  buf.clear()
+
+              for ln in markdown.splitlines():
+                  m = re.match(r"^(#{1,3})\s+(.*)$", ln)
+                  if m:
+                      flush()
+                      level = min(len(m.group(1)),3)
+                      title = m.group(2).strip()
+                      blocks.append({
+                          "type": f"heading_{level}",
+                          f"heading_{level}": {"rich_text":[{"type":"text","text":{"content": title}}]}
+                      })
+                  elif ln.strip()=="":
+                      flush()
+                  else:
+                      buf.append(ln)
+              flush()
+              return blocks
+
+          def create_page(title: str, md: str):
+              blocks = md_to_blocks(md)
+              today = datetime.date.today().isoformat()
+              # Content 属性放一个简短摘要/提示，正文放在 children blocks
+              summary = (md.replace("\n"," ")[:1800] or "见页面正文")
+              props = {
+                  TITLE_PROP: {"title":[{"type":"text","text":{"content": title}}]},
+                  DATE_PROP:  {"date":{"start": today}},
+                  CONTENT_PROP: {"rich_text":[{"type":"text","text":{"content": summary}}]}
+              }
+              payload = {"parent":{"database_id": DB_ID}, "properties": props, "children": blocks[:200]}
+              r = requests.post("https://api.notion.com/v1/pages", headers=HEADERS, data=json.dumps(payload))
+              if r.status_code >= 300:
+                  raise SystemExit(f"Create page failed: {r.status_code} {r.text}")
+              page_id = r.json()["id"]
+              for i in range(200, len(blocks), 200):
+                  chunk = {"children": blocks[i:i+200]}
+                  rr = requests.patch(f"https://api.notion.com/v1/blocks/{page_id}/children",
+                                      headers=HEADERS, data=json.dumps(chunk))
+                  if rr.status_code >= 300:
+                      raise SystemExit(f"Append failed: {rr.status_code} {rr.text}")
+              print("Notion sync done:", title)
+
+          # 读取并推送
+          p_zh = pathlib.Path("reports/latest_report_zh.md")
+          if p_zh.exists():
+              md_zh = p_zh.read_text(encoding="utf-8").strip()
+              create_page(f"AI 趋势日报（ZH）{datetime.date.today().isoformat()}", md_zh)
+          else:
+              print("WARN: latest_report_zh.md not found, skip ZH")
+
+          p_en = pathlib.Path("reports/latest_report_en.md")
+          if p_en.exists():
+              md_en = p_en.read_text(encoding="utf-8").strip()
+              create_page(f"AI Trends Daily (EN) {datetime.date.today().isoformat()}", md_en)
+          else:
+              print("WARN: latest_report_en.md not found, skip EN")
+          PY
