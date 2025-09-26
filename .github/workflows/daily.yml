@@ -64,11 +64,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref_name }}
 
+      # ⚠️ 改动点：Notion 同步无条件执行（每次 run 都会跑）
       - name: Push reports to Notion (ZH & EN)
-        if: steps.git_status.outputs.changed == 'true'
         env:
           NOTION_API_KEY:     ${{ secrets.NOTION_API_KEY }}
-          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}   # ← 已修正（加了空格）
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: |
           python - <<'PY'
           import os, json, re, datetime, pathlib, requests, time
@@ -83,6 +83,8 @@ jobs:
 
           TITLE_PROP = "Title"
           DATE_PROP  = "Date"
+          STATUS_PROP = "排版状态"         # 你的库有这个字段
+          STATUS_VALUE = "已排版"          # 视图有可能按这个字段做过滤
 
           def md_to_blocks(md: str):
               blocks, buf = [], []
@@ -133,6 +135,8 @@ jobs:
               props = {TITLE_PROP: {"title":[{"type":"text","text":{"content": title}}]}}
               if DATE_PROP:
                   props[DATE_PROP] = {"date":{"start": date_iso}}
+              # 同步设置“排版状态=已排版”，避免被视图过滤掉
+              props[STATUS_PROP] = {"select": {"name": STATUS_VALUE}}
 
               payload = {"parent":{"database_id": DB_ID}, "properties": props, "children": first}
               r = requests.post("https://api.notion.com/v1/pages", headers=HEADERS, data=json.dumps(payload))
@@ -154,15 +158,19 @@ jobs:
           zh_path = reports_dir / "latest_report_zh.md"
           en_path = reports_dir / "latest_report_en.md"
 
+          pushed = False
+
           if zh_path.exists():
               title = f"AI 趋势日报 (ZH) {today}"
               md = zh_path.read_text(encoding="utf-8")
               create_with_chunks(title, md, today)
+              pushed = True
 
           if en_path.exists():
               title = f"AI Trends Daily (EN) {today}"
               md = en_path.read_text(encoding="utf-8")
               create_with_chunks(title, md, today)
+              pushed = True
 
-          print("Notion sync done.")
+          print("Notion sync done." if pushed else "No report files found to push.")
           PY
