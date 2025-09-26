@@ -9,7 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # 回推代码必须要有写权限
     permissions:
       contents: write
 
@@ -27,7 +26,6 @@ jobs:
       - name: Install deps
         run: pip install -r requirements.txt
 
-      # 生成日报（如果没有设置 REPORT_LANGUAGES，就默认 zh en）
       - name: Generate reports (ZH & EN)
         env:
           REDDIT_CLIENT_ID:     ${{ secrets.REDDIT_CLIENT_ID }}
@@ -42,7 +40,6 @@ jobs:
             python report_generation.py --languages ${REPORT_LANGUAGES}
           fi
 
-      # 仅当 reports/ 目录有变化时才提交
       - name: Detect changes
         id: git_status
         run: |
@@ -60,7 +57,6 @@ jobs:
           git add reports/
           git commit -m "Daily report update"
 
-      # 用稳定的 action 回推，避免 443/鉴权不稳
       - name: Push changes (only when changed)
         if: steps.git_status.outputs.changed == 'true'
         uses: ad-m/github-push-action@v0.8.0
@@ -68,12 +64,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref_name }}
 
-      # 将最新 ZH/EN 报告写入 Notion（自动分块 ≤100，避免 children 长度报错）
       - name: Push reports to Notion (ZH & EN)
         if: steps.git_status.outputs.changed == 'true'
         env:
-          NOTION_API_KEY:    ${{ secrets.NOTION_API_KEY }}
-          NOTION_DATABASE_ID:${{ secrets.NOTION_DATABASE_ID }}
+          NOTION_API_KEY:     ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}   # ← 已修正（加了空格）
         run: |
           python - <<'PY'
           import os, json, re, datetime, pathlib, requests, time
@@ -86,9 +81,8 @@ jobs:
               "Content-Type": "application/json",
           }
 
-          TITLE_PROP = "Title"   # 你的数据库里标题列名
-          DATE_PROP  = "Date"    # 你的数据库里日期列名（可选）
-          # Content 列如果只是展示用，不再写入；正文用 blocks 写入页面内容本体
+          TITLE_PROP = "Title"
+          DATE_PROP  = "Date"
 
           def md_to_blocks(md: str):
               blocks, buf = [], []
@@ -97,7 +91,7 @@ jobs:
                   text = "\n".join(buf).strip()
                   if not text:
                       buf.clear(); return
-                  text = re.sub(r"\|", " ", text)[:1900]  # 表格竖线替换，避免超长
+                  text = re.sub(r"\|", " ", text)[:1900]
                   blocks.append({
                       "object": "block",
                       "type": "paragraph",
