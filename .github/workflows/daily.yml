@@ -2,55 +2,54 @@ name: Daily Reddit AI Trends
 
 on:
   schedule:
-    # 每天 北京时间 07:00 运行（UTC 23:00）
-    - cron: "0 23 * * *"
-  workflow_dispatch:
+    - cron: "5 6 * * *"   # 每天 06:05 UTC 运行
+  workflow_dispatch:       # 允许手动触发
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    # 回推代码必须要有写权限
     permissions:
       contents: write
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install deps (optional)
-        run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Install deps
+        run: pip install -r requirements.txt
 
-      # 仅生成中文日报（去掉 EN）
-      - name: Generate report (ZH only)
+      # 生成日报（如果没有设置 REPORT_LANGUAGES，就默认 zh en）
+      - name: Generate reports (ZH & EN)
         env:
           REDDIT_CLIENT_ID:     ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
           REDDIT_USER_AGENT:    ${{ secrets.REDDIT_USER_AGENT }}
           GROQ_API_KEY:         ${{ secrets.GROQ_API_KEY }}
+          REPORT_LANGUAGES:     ${{ secrets.REPORT_LANGUAGES }}
         run: |
-          # 如果你的脚本用参数控制语言，请改成实际命令
-          # 示例：python report_generation.py --languages zh
-          if [ -f report_generation.py ]; then
-            python report_generation.py --languages zh
+          if [ -z "${REPORT_LANGUAGES}" ]; then
+            python report_generation.py --languages zh en
+          else
+            python report_generation.py --languages ${REPORT_LANGUAGES}
           fi
-          # 保底：如果没有新产物，至少touch一下文件，方便后续判断
-          mkdir -p reports
-          [ -f reports/latest_report_zh.md ] || echo "# 趋势分析\n\n（暂无内容）" > reports/latest_report_zh.md
 
-      # 仅当内容有变化才 commit/push，避免无意义的网络连接
+      # 仅当 reports/ 目录有变化时才提交
       - name: Detect changes
         id: git_status
         run: |
-          if git diff --quiet && git diff --cached --quiet; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
+          if git status --porcelain reports | grep -qE '^( M|M |A |??)'; then
+            echo "changed=true" >> $GITHUB_OUTPUT
           else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Commit reports (only when changed)
@@ -58,179 +57,118 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Daily report update [${{ github.run_id }}]"
+          git add reports/
+          git commit -m "Daily report update"
 
-      - name: Push with retry (only when changed)
+      # 用稳定的 action 回推，避免 443/鉴权不稳
+      - name: Push changes (only when changed)
+        if: steps.git_status.outputs.changed == 'true'
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref_name }}
+
+      # 将最新 ZH/EN 报告写入 Notion（自动分块 ≤100，避免 children 长度报错）
+      - name: Push reports to Notion (ZH & EN)
         if: steps.git_status.outputs.changed == 'true'
         env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.git
-          for i in 1 2 3 4 5; do
-            git push origin HEAD:${GITHUB_REF_NAME} && exit 0
-            echo "Push failed (attempt $i). Retrying..."
-            sleep $((i*10))
-          done
-          echo "Push failed after retries." >&2
-          exit 1
-
-      # Notion 写入：无论上一步是否失败都执行，防止网络抖动阻断链路
-      - name: Push ZH report to Notion (blocks)
-        if: always()
-        env:
-          NOTION_API_KEY:     ${{ secrets.NOTION_API_KEY }}
-          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          NOTION_API_KEY:    ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID:${{ secrets.NOTION_DATABASE_ID }}
         run: |
           python - <<'PY'
-          import os, re, json, time, datetime, requests, pathlib
-          from textwrap import wrap
+          import os, json, re, datetime, pathlib, requests, time
 
-          NOTION_TOKEN = os.environ["NOTION_API_KEY"]
-          DB_ID        = os.environ["NOTION_DATABASE_ID"]
-          FILE_ZH      = "reports/latest_report_zh.md"
-
-          # ---------- 简单 Markdown -> Notion blocks 转换（标题/段落/列表） ----------
-          def md_to_blocks(md: str):
-            lines = md.splitlines()
-            blocks = []
-            bullet_buffer = []
-
-            def flush_bullets():
-              nonlocal bullet_buffer, blocks
-              for txt in bullet_buffer:
-                blocks.append({
-                  "object": "block",
-                  "type": "bulleted_list_item",
-                  "bulleted_list_item": {
-                    "rich_text": [{"type":"text","text":{"content":txt}}]
-                  }
-                })
-              bullet_buffer = []
-
-            for raw in lines:
-              line = raw.rstrip()
-              if not line.strip():
-                flush_bullets()
-                continue
-
-              # 1) 识别标题 # / ## / ###
-              m = re.match(r'^(#{1,3})\s+(.*)$', line)
-              if m:
-                flush_bullets()
-                level = len(m.group(1))
-                text  = m.group(2).strip()
-                key   = {1:"heading_1", 2:"heading_2", 3:"heading_3"}[level]
-                blocks.append({
-                  "object":"block",
-                  "type": key,
-                  key: {"rich_text":[{"type":"text","text":{"content":text}}]}
-                })
-                continue
-
-              # 2) 列表 - / * / 1.
-              if re.match(r'^(\-|\*)\s+', line):
-                bullet_buffer.append(re.sub(r'^(\-|\*)\s+', '', line).strip())
-                continue
-              if re.match(r'^\d+\.\s+', line):
-                flush_bullets()
-                text = re.sub(r'^\d+\.\s+', '', line).strip()
-                blocks.append({
-                  "object":"block",
-                  "type":"numbered_list_item",
-                  "numbered_list_item":{"rich_text":[{"type":"text","text":{"content":text}}]}
-                })
-                continue
-
-              # 3) 普通段落（长段落分片避免单块过长）
-              flush_bullets()
-              # Notion 单富文本太长可能失败，做个软切片
-              for chunk in wrap(line, width=1800, break_long_words=False):
-                blocks.append({
-                  "object":"block",
-                  "type":"paragraph",
-                  "paragraph":{"rich_text":[{"type":"text","text":{"content":chunk}}]}
-                })
-
-            flush_bullets()
-            return blocks
-
-          # ---------- 读取 MD 并根据你的规则做最小重排（把“趋势分析”放最前） ----------
-          def promote_trend(md: str) -> str:
-            # 如果已存在“## 趋势分析”，提到最上；否则生成占位并抽取要点（这里只做占位，不创造事实）
-            sections = re.split(r'(?m)^##\s+', md)
-            heads = re.findall(r'(?m)^##\s+.*$', md)
-            # 简化：直接把“## 趋势分析”置顶，不在此处抄写复杂抽取逻辑（你之前在 Coze 已有更智能化流程）
-            if any('趋势分析' in h for h in heads):
-              # 把该段搬到最前
-              parts = re.split(r'(?m)(^##\s+趋势分析.*$)', md)
-              if len(parts) >= 3:
-                head = parts[1]
-                rest = ''.join(parts[2:])
-                # 找到下一个 ## 截断
-                m = re.search(r'(?m)^##\s+', rest)
-                if m:
-                  body = rest[:m.start()]
-                  remain = rest[m.start():]
-                else:
-                  body = rest
-                  remain = ''
-                md_new = f"{head}\n{body}\n{remain}"
-                return md_new.strip()
-              return md
-            else:
-              today = datetime.date.today().isoformat()
-              return f"## 趋势分析\n\n（占位：暂无专门的趋势总结，请根据下文要点补充）\n\n{md}"
-
-          # ---------- Notion 请求 ----------
+          TOKEN = os.environ["NOTION_API_KEY"]
+          DB_ID = os.environ["NOTION_DATABASE_ID"]
           HEADERS = {
-            "Authorization": f"Bearer {NOTION_TOKEN}",
-            "Content-Type": "application/json",
-            "Notion-Version": "2022-06-28"
+              "Authorization": f"Bearer {TOKEN}",
+              "Notion-Version": "2022-06-28",
+              "Content-Type": "application/json",
           }
 
-          def notion_create_page(title_text, date_iso):
-            payload = {
-              "parent": {"database_id": DB_ID},
-              "properties": {
-                "Title": { "title": [ { "type":"text", "text": { "content": title_text } } ] },
-                "Date":  { "date":  { "start": date_iso } },
-                "排版状态": { "select": { "name": "已排版" } }
-              }
-            }
-            r = requests.post("https://api.notion.com/v1/pages", headers=HEADERS, data=json.dumps(payload))
-            r.raise_for_status()
-            return r.json()["id"]
+          TITLE_PROP = "Title"   # 你的数据库里标题列名
+          DATE_PROP  = "Date"    # 你的数据库里日期列名（可选）
+          # Content 列如果只是展示用，不再写入；正文用 blocks 写入页面内容本体
 
-          def notion_append_blocks(page_id, blocks):
-            # Notion 一次最多 100 个，分批追加
-            url = f"https://api.notion.com/v1/blocks/{page_id}/children"
-            for i in range(0, len(blocks), 90):
-              chunk = { "children": blocks[i:i+90] }
-              rr = requests.patch(url, headers=HEADERS, data=json.dumps(chunk))
-              rr.raise_for_status()
-              time.sleep(0.2)
+          def md_to_blocks(md: str):
+              blocks, buf = [], []
+              def flush_p():
+                  if not buf: return
+                  text = "\n".join(buf).strip()
+                  if not text:
+                      buf.clear(); return
+                  text = re.sub(r"\|", " ", text)[:1900]  # 表格竖线替换，避免超长
+                  blocks.append({
+                      "object": "block",
+                      "type": "paragraph",
+                      "paragraph": {"rich_text": [{"type":"text","text":{"content": text}}]}
+                  })
+                  buf.clear()
 
-          # ---------- 主流程 ----------
-          p = pathlib.Path(FILE_ZH)
-          if not p.exists():
-            print("No zh report found, skip.")
-            raise SystemExit(0)
+              for line in md.splitlines():
+                  m = re.match(r'^(#{1,3})\s+(.*)$', line)
+                  if m:
+                      flush_p()
+                      level = len(m.group(1))
+                      title = m.group(2)[:200]
+                      blocks.append({
+                          "object":"block",
+                          "type": f"heading_{level}",
+                          f"heading_{level}": {"rich_text":[{"type":"text","text":{"content": title}}]}
+                      })
+                  elif re.match(r'^\s*[-*]\s+', line):
+                      flush_p()
+                      item = re.sub(r'^\s*[-*]\s+', '', line)[:1900]
+                      blocks.append({
+                          "object":"block",
+                          "type":"bulleted_list_item",
+                          "bulleted_list_item":{"rich_text":[{"type":"text","text":{"content": item}}]}
+                      })
+                  else:
+                      buf.append(line)
+              flush_p()
+              return blocks or [{
+                  "object":"block","type":"paragraph",
+                  "paragraph":{"rich_text":[{"type":"text","text":{"content":"(空)"}}]}
+              }]
 
-          md = p.read_text(encoding="utf-8")
-          md = promote_trend(md)
+          def create_with_chunks(title, md, date_iso):
+              blocks = md_to_blocks(md)
+              first, rest = blocks[:80], blocks[80:]
 
-          # 组 blocks
-          blocks = md_to_blocks(md)
+              props = {TITLE_PROP: {"title":[{"type":"text","text":{"content": title}}]}}
+              if DATE_PROP:
+                  props[DATE_PROP] = {"date":{"start": date_iso}}
 
-          # 今天日期
+              payload = {"parent":{"database_id": DB_ID}, "properties": props, "children": first}
+              r = requests.post("https://api.notion.com/v1/pages", headers=HEADERS, data=json.dumps(payload))
+              if r.status_code >= 300:
+                  raise RuntimeError(f"create page failed: {r.status_code} {r.text}")
+              page_id = r.json()["id"]
+
+              while rest:
+                  chunk, rest = rest[:90], rest[90:]
+                  url = f"https://api.notion.com/v1/blocks/{page_id}/children"
+                  r2 = requests.patch(url, headers=HEADERS, data=json.dumps({"children": chunk}))
+                  if r2.status_code >= 300:
+                      raise RuntimeError(f"append children failed: {r2.status_code} {r2.text}")
+                  time.sleep(0.3)
+              return page_id
+
           today = datetime.date.today().isoformat()
-          title = f"AI 趋势日报 (ZH) {today}"
+          reports_dir = pathlib.Path("reports")
+          zh_path = reports_dir / "latest_report_zh.md"
+          en_path = reports_dir / "latest_report_en.md"
 
-          page_id = notion_create_page(title, today)
-          # 正文写入 blocks
-          if blocks:
-            notion_append_blocks(page_id, blocks)
+          if zh_path.exists():
+              title = f"AI 趋势日报 (ZH) {today}"
+              md = zh_path.read_text(encoding="utf-8")
+              create_with_chunks(title, md, today)
 
-          print("Notion page created:", page_id)
+          if en_path.exists():
+              title = f"AI Trends Daily (EN) {today}"
+              md = en_path.read_text(encoding="utf-8")
+              create_with_chunks(title, md, today)
+
+          print("Notion sync done.")
           PY
